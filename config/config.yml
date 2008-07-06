@@ -1,0 +1,8 @@
+uri_templates:
+  top:            http://pinto.jp/
+  index:          http://pinto.jp/index{lang}
+  signup_openid:  http://pinto.jp/signup_forms/openid{lang}
+  signup_auth:    http://pinto.jp/signup_forms/auth{lang}{query}
+  signup_account: http://pinto.jp/signup_forms/account{lang}{query}
+  users:          http://pinto.jp/users{lang}
+  user:           http://pinto.jp/users/{username}{lang}
