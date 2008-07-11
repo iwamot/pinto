@@ -6,3 +6,11 @@ uri_templates:
   signup_account: http://pinto.jp/signup_forms/account{lang}{query}
   users:          http://pinto.jp/users{lang}
   user:           http://pinto.jp/users/{username}{lang}
+
+languages:
+  -
+    code: en
+    name: English
+  -
+    code: ja
+    name: Japanese

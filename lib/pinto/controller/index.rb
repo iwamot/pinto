@@ -1,17 +1,17 @@
-# lib/pinto/controller/top.rb
+# lib/pinto/controller/index.rb
 
+require 'pinto/config'
 require 'pinto/view'
 
 module Pinto
   module Controller
-    class Top
+    class Index
       def self.run(request)
         param = {
-          :greeting => '"<こんにちはRuby>"',
-          :color    => 'red',
-          :address  => '<address>id:IwamotoTakashi</address>'
+          :lang => request['uri_map']['lang']
         }
-        response_body = Pinto::View.render('top', param)
+
+        response_body = Pinto::View.render('index', param)
 
         return [
           200,

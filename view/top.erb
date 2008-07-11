@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
 <head>
 <title>Pinto</title>
@@ -8,8 +7,9 @@
 <body>
 <h1>Pinto</h1>
 <ul>
-<li><a href="<%== uri('index', 'lang' => 'en') %>">English version</a></li>
-<li><a href="<%== uri('index', 'lang' => 'ja') %>">Japanese version</a></li>
+<% @languages.each do |lang| %>
+<li><a href="<%== uri('index', 'lang' => lang['code']) %>"><%= lang['name'] %> version</a></li>
+<% end %>
 </ul>
 </body>
 </html>
