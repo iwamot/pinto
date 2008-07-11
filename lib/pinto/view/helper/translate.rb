@@ -10,7 +10,7 @@ module Pinto
 
         def _(value)
           GetText.set_output_charset('UTF-8')
-          GetText.bindtextdomain('pinto', {:path => '../../locale'})
+          GetText.bindtextdomain('pinto', {:path => '../locale'})
           GetText.set_locale(@lang)
           return GetText._(value)
         end
