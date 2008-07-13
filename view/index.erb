@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%== in_quote(@lang) %>">
 <head>
 <title>Pinto</title>
 </head>
 <body>
 <h1>Pinto</h1>
 <ul>
-<li><a href="<%== uri('signup_openid', 'lang' => @lang) %>"><%= _('Sign Up') %></a></li>
+<li><a href="<%== in_quote(uri('signup_openid', 'lang' => @lang)) %>"><%= _('Sign Up') %></a></li>
+<% @other_langs.each do |lang| %>
+<li><a rel="alternate" hreflang="<%== in_quote(lang['code']) %>" href="<%== in_quote(uri('index', 'lang' => lang['code'])) %>"><%= _('%{language} version of this page') % {:language => _(lang['name'])} %></a></li>
+<% end %>
 </ul>
 </body>
 </html>

@@ -8,9 +8,11 @@ uri_templates:
   user:           http://pinto.jp/users/{username}{lang}
 
 languages:
-  -
-    code: en
+  - code: en
     name: English
-  -
-    code: ja
+  - code: ja
     name: Japanese
+
+openid_providers:
+  - yahoo.com
+  - yahoo.co.jp

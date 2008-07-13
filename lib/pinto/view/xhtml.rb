@@ -1,9 +1,9 @@
 # lib/pinto/view/xhtml.rb
 
 require 'erubis'
-require 'pinto/view/helper/html'
-require 'pinto/view/helper/translate'
-require 'pinto/view/helper/uri'
+require 'pinto/helper/html'
+require 'pinto/helper/translate'
+require 'pinto/helper/uri'
 
 module Pinto
   class View
@@ -14,11 +14,11 @@ module Pinto
 
       def evaluate(param)
         context = Erubis::Context.new(param)
-        context.extend Pinto::View::Helper::HTML
-        context.extend Pinto::View::Helper::URI
+        context.extend Pinto::Helper::HTML
+        context.extend Pinto::Helper::URI
 
         if param.has_key? :lang
-          context.extend Pinto::View::Helper::Translate
+          context.extend Pinto::Helper::Translate
           context.lang = param[:lang]
         end
 

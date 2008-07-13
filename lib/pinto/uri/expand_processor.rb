@@ -1,5 +1,7 @@
+# lib/pinto/uri/expand_processor.rb
+
 module Pinto
-  class URI
+  module URI
     class ExpandProcessor
       def self.transform(name, value)
         return '.' + value if name == 'lang'

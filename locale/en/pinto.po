@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pinto 0.0.1\n"
-"POT-Creation-Date: 2008-07-11 22:35+0900\n"
-"PO-Revision-Date: 2008-07-11 22:37+0900\n"
+"POT-Creation-Date: 2008-07-13 16:27+0900\n"
+"PO-Revision-Date: 2008-07-13 16:27+0900\n"
 "Last-Translator: IWAMOTO Takashi <hello@iwamot.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,22 @@ msgstr ""
 # This file is distributed under the same license as the Pinto package.
 # IWAMOTO Takashi <hello@iwamot.com>, 2008.
 #
+msgid "English"
+msgstr "English"
+
+msgid "Japanese"
+msgstr "Japanese"
+
 #: view/index.erb:10
 msgid "Sign Up"
 msgstr "Sign Up"
+
+#: view/index.erb:12
+#: view/signup_openid.erb:22
+msgid "%{language} version of this page"
+msgstr "%{language} version of this page"
+
+#: view/signup_openid.erb:11
+msgid "OpenID Provider"
+msgstr "OpenID Provider"
 

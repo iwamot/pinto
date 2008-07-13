@@ -1,5 +1,7 @@
+# lib/pinto/uri/extract_processor.rb
+
 module Pinto
-  class URI
+  module URI
     class ExtractProcessor
       def self.match(name)
         return '\.ja|\.en|'      if name == 'lang'

@@ -12,7 +12,7 @@ module Pinto
       uri_templates = Pinto::Config.load('uri_templates')
       request = Rack::Request.new(env)
       controller, request[:uri_map] = extract(uri_templates, request.url)
-      run_controller(controller, request)
+      return run_controller(controller, request)
     end
 
     def extract(uri_templates, request_uri)
@@ -21,13 +21,13 @@ module Pinto
         param = uri.extract_mapping(template, Pinto::URI::ExtractProcessor)
         return [controller, param] unless param.nil?
       end
-      ['not_found', {}]
+      return ['not_found', {}]
     end
 
     def run_controller(controller, request)
       path = Pathname.new("pinto/controller/#{controller}")
       require path
-      path.get_class.run(request)
+      return path.get_class.run(request)
     end
   end
 end
