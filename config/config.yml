@@ -16,3 +16,4 @@ languages:
 openid_providers:
   - yahoo.com
   - yahoo.co.jp
+  - myopenid.com

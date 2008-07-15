@@ -3,29 +3,25 @@
 require 'addressable/uri'
 require 'pinto/config'
 require 'pinto/pathname'
+require 'pinto/request'
 require 'pinto/uri/extract_processor'
-require 'rack'
 
 module Pinto
   class Dispatcher
     def call(env)
-      uri_templates = Pinto::Config.load('uri_templates')
-      request = Rack::Request.new(env)
-      controller, request[:uri_map] = extract(uri_templates, request.url)
-      return run_controller(controller, request)
-    end
+      request = Pinto::Request.new(env)
+      uri = Addressable::URI.parse(request.url)
 
-    def extract(uri_templates, request_uri)
-      uri = Addressable::URI.parse(request_uri)
-      uri_templates.each do |controller, template|
-        param = uri.extract_mapping(template, Pinto::URI::ExtractProcessor)
-        return [controller, param] unless param.nil?
+      Pinto::Config.load('uri_templates').each do |controller, template|
+        uri_map = uri.extract_mapping(template, Pinto::URI::ExtractProcessor)
+        unless uri_map.nil?
+          request.controller = controller
+          request.uri_map    = uri_map
+          break
+        end
       end
-      return ['not_found', {}]
-    end
 
-    def run_controller(controller, request)
-      path = Pathname.new("pinto/controller/#{controller}")
+      path = Pathname.new("pinto/controller/#{request.controller}")
       require path
       return path.get_class.run(request)
     end
