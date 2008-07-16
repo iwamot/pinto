@@ -8,7 +8,7 @@
 <h1>Pinto</h1>
 <ul>
 <% @languages.each do |lang| %>
-<li><a href="<%== in_quote(uri('index', 'lang' => lang['code'])) %>"><%= lang['name'] %> version</a></li>
+<li><a rel="alternate" hreflang="<%== in_quote(lang['code']) %>" href="<%== in_quote(uri('index', 'lang' => lang['code'])) %>"><%= lang['name'] %> version</a></li>
 <% end %>
 </ul>
 </body>

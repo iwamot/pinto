@@ -1,6 +1,7 @@
 # lib/pinto/controller/index.rb
 
 require 'pinto/controller/multiple'
+require 'pinto/helper/uri'
 require 'pinto/language'
 require 'pinto/view'
 
@@ -21,9 +22,14 @@ module Pinto
         }
         response_body = Pinto::View.render('index', param)
 
+        platonic_uri = Pinto::Helper::URI.uri('top')
+
         return [
           200,
-          {'Content-Type' => 'application/xhtml+xml; charset=UTF-8'},
+          {
+            'Content-Type'     => 'application/xhtml+xml; charset=UTF-8',
+            'Content-Location' => platonic_uri
+          },
           [response_body]
         ]
       end

@@ -20,9 +20,6 @@ module Pinto
         end
 
         request_lang = request.uri_map['lang']
-        # ToDo：request_langが指定されていない場合、multipleビューを表示
-        # ToDo：multipleビューのuri生成ロジックを変える
-        # コントローラが頑張りすぎ…
 
         return_url = Pinto::Helper::URI.uri(
           'signup_account', 'lang' => request_lang

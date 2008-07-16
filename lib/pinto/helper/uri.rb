@@ -9,7 +9,7 @@ module Pinto
     module URI
       module_function
 
-      def uri(controller, param)
+      def uri(controller, param = {})
         uri_templates = Pinto::Config.load('uri_templates')
         return Addressable::URI.expand_template(
           uri_templates[controller],
