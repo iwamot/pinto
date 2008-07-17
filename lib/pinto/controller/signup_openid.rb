@@ -22,6 +22,7 @@ module Pinto
           :other_langs => other_languages,
           :providers   => providers
         }
+
         response_body = Pinto::View.render('signup_openid', param)
 
         platonic_uri = Pinto::Helper::URI.uri('signup_openid')

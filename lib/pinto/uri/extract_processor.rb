@@ -1,5 +1,7 @@
 # lib/pinto/uri/extract_processor.rb
 
+require 'rack'
+
 module Pinto
   module URI
     class ExtractProcessor
@@ -11,9 +13,15 @@ module Pinto
       end
 
       def self.restore(name, value)
-        return value.gsub(/^\./, '') if name == 'lang'
-        return value.gsub(/^\?/, '') if name == 'query'
-        return value
+        case name
+        when 'lang'
+          restore_value = value.gsub(/^\./, '')
+        when 'query'
+          restore_value = value.gsub(/^\?/, '')
+        else
+          restore_value = value
+        end
+        return Rack::Utils.unescape(restore_value)
       end
     end
   end

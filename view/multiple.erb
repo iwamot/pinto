@@ -5,10 +5,10 @@
 <title>Pinto</title>
 </head>
 <body>
-<h1><a rel="start" href="/">Pinto</a></h1>
+<h1><% unless @controller == 'index' %><a rel="start" href="<%== in_quote(uri('top')) %>"><% end %>Pinto<% unless @controller == 'index' %></a><% end %></h1>
 <ul>
 <% @languages.each do |lang| %>
-<li><a rel="alternate" hreflang="<%== in_quote(lang['code']) %>" href="<%== in_quote(uri(@controller, 'lang' => lang['code'])) %>"><%= lang['name'] %> version</a></li>
+<li><a rel="alternate" hreflang="<%== in_quote(lang['code']) %>" href="<%== in_quote(uri(@controller, @uri_map.merge('lang' => lang['code']))) %>"><%= lang['name'] %> version</a></li>
 <% end %>
 </ul>
 </body>

@@ -5,6 +5,8 @@
 #                           :path => '/',
 #                           :expire_after => 60 * 60 * 24 * 30
 
+use Rack::Reloader, 1
+
 $LOAD_PATH << 'lib'
 require 'pinto/dispatcher'
 run Pinto::Dispatcher.new

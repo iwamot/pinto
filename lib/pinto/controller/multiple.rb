@@ -8,10 +8,13 @@ module Pinto
     class Multiple
       def self.run(request)
         languages = Pinto::Config.load('languages')
+        uri_map = request.uri_map
+        uri_map.delete('lang')
 
         param = {
           :controller => request.controller,
-          :languages  => languages
+          :languages  => languages,
+          :uri_map    => uri_map
         }
 
         response_body = Pinto::View.render('multiple', param)

@@ -15,11 +15,11 @@ module Pinto
         end
 
         other_languages = Pinto::Language.get_other(request_lang)
-
         param = {
           :lang        => request_lang,
           :other_langs => other_languages
         }
+
         response_body = Pinto::View.render('index', param)
 
         platonic_uri = Pinto::Helper::URI.uri('top')

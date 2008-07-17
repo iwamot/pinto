@@ -1,23 +1,13 @@
 # lib/pinto/controller/top.rb
 
-require 'pinto/config'
-require 'pinto/view'
+require 'pinto/controller/multiple'
 
 module Pinto
   module Controller
     class Top
       def self.run(request)
-        param = {
-          :languages => Pinto::Config.load('languages')
-        }
-
-        response_body = Pinto::View.render('top', param)
-
-        return [
-          300,
-          {'Content-Type' => 'application/xhtml+xml; charset=UTF-8'},
-          [response_body]
-        ]
+        request.controller = 'index'
+        return Pinto::Controller::Multiple.run(request)
       end
     end
   end
