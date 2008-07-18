@@ -10,7 +10,7 @@ task :pot do
     File.rename(POT_FILE, POT_FILE + '.' + mtime)
   end
 
-  GetText.rgettext(Dir.glob('view/*.erb'), POT_FILE)
+  GetText.rgettext(Dir.glob('{lib,view}/**/*.{rb,erb}'), POT_FILE)
 
   contents = File.read(POT_FILE)
   contents = NKF.nkf('-Lu', contents)

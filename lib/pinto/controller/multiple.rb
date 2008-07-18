@@ -1,13 +1,14 @@
 # lib/pinto/controller/multiple.rb
 
 require 'pinto/config'
+require 'pinto/language'
 require 'pinto/view'
 
 module Pinto
   module Controller
     class Multiple
       def self.run(request)
-        languages = Pinto::Config.load('languages')
+        languages = Pinto::Language.list
         uri_map = request.uri_map
         uri_map.delete('lang')
 

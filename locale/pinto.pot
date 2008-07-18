@@ -4,8 +4,8 @@
 # IWAMOTO Takashi <hello@iwamot.com>, 2008.
 #
 "Project-Id-Version:  Pinto 0.0.1\n"
-"POT-Creation-Date: 2008-07-13 16:27+0900\n"
-"PO-Revision-Date: 2008-07-13 16:27+0900\n"
+"POT-Creation-Date: 2008-07-18 21:36+0900\n"
+"PO-Revision-Date: 2008-07-18 21:36+0900\n"
 "Last-Translator: IWAMOTO Takashi <hello@iwamot.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -13,12 +13,13 @@
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: lib/pinto/language.rb:14
 msgid "English"
 msgstr ""
 
+#: lib/pinto/language.rb:15
 msgid "Japanese"
 msgstr ""
-
 
 #: view/index.erb:10
 msgid "Sign Up"
@@ -30,4 +31,8 @@ msgstr ""
 
 #: view/signup_openid.erb:11
 msgid "OpenID Provider"
+msgstr ""
+
+#: view/signup_openid.erb:17
+msgid "OK"
 msgstr ""
