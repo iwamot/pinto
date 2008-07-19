@@ -6,7 +6,7 @@ module Pinto
   module URI
     class ExtractProcessor
       def self.match(name)
-        return '\.ja|\.en|'      if name == 'lang'
+        return 'ja\.|en\.|'      if name == 'lang'
         return '\?.+|'           if name == 'query'
         return '[0-9a-zA-Z_\-]+' if name == 'username'
         return '.*'
@@ -15,7 +15,7 @@ module Pinto
       def self.restore(name, value)
         case name
         when 'lang'
-          restore_value = value.gsub(/^\./, '')
+          restore_value = value.gsub(/\.$/, '')
         when 'query'
           restore_value = value.gsub(/^\?/, '')
         else

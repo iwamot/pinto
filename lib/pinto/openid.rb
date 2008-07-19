@@ -7,7 +7,7 @@ require 'pinto/helper/uri'
 module Pinto
   class OpenID
     def self.begin(openid, lang)
-      realm     = Pinto::Helper::URI.uri('top')
+      realm     = Pinto::Helper::URI.uri('index', 'lang' => lang)
       return_to = Pinto::Helper::URI.uri('signup_account', 'lang' => lang)
 
       request = self.consumer().begin(openid)

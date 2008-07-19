@@ -1,11 +1,10 @@
 uri_templates:
-  top:            http://pinto.jp/
-  index:          http://pinto.jp/index{lang}
-  signup_openid:  http://pinto.jp/signup_forms/openid{lang}
-  signup_auth:    http://pinto.jp/signup_forms/auth{lang}{query}
-  signup_account: http://pinto.jp/signup_forms/account{lang}{query}
-  users:          http://pinto.jp/users{lang}
-  user:           http://pinto.jp/users/{username}{lang}
+  index:          http://{lang}pinto.jp/
+  signup_openid:  http://{lang}pinto.jp/signup_forms/openid
+  signup_auth:    http://{lang}pinto.jp/signup_forms/auth{query}
+  signup_account: http://{lang}pinto.jp/signup_forms/account{query}
+  users:          http://{lang}pinto.jp/users
+  user:           http://{lang}pinto.jp/users/{username}
 
 openid_providers:
   - yahoo.com

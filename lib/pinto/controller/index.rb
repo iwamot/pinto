@@ -22,7 +22,7 @@ module Pinto
 
         response_body = Pinto::View.render('index', param)
 
-        platonic_uri = Pinto::Helper::URI.uri('top')
+        platonic_uri = Pinto::Helper::URI.uri('index')
 
         return [
           200,
