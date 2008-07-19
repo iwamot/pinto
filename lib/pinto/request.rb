@@ -12,5 +12,13 @@ module Pinto
       @uri_map    = {}
       super(env)
     end
+
+    def head?
+      return (request_method == 'HEAD')
+    end
+
+    def options?
+      return (request_method == 'OPTIONS')
+    end
   end
 end

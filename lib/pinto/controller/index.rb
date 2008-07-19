@@ -1,6 +1,7 @@
 # lib/pinto/controller/index.rb
 
-require 'pinto/controller/multiple'
+require 'pinto/controller/private/base'
+require 'pinto/controller/private/multiple'
 require 'pinto/helper/uri'
 require 'pinto/language'
 require 'pinto/view'
@@ -8,10 +9,12 @@ require 'pinto/view'
 module Pinto
   module Controller
     class Index
-      def self.run(request)
+      include Pinto::Controller::Private::Base
+
+      def get_action(request)
         request_lang = request.uri_map['lang']
         if request_lang.empty?
-          return Pinto::Controller::Multiple.run(request)
+          return Pinto::Controller::Private::Multiple.run(request)
         end
 
         other_languages = Pinto::Language.get_other(request_lang)

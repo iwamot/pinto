@@ -23,7 +23,7 @@ module Pinto
 
       path = Pathname.new("pinto/controller/#{request.controller}")
       require path
-      return path.get_class.run(request)
+      return path.get_class.new.run(request)
     end
   end
 end

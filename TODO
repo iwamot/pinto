@@ -1,5 +1,5 @@
+・エラー処理を検討する（OpenID認証失敗時など）
+　・Dispatcherでcatchして500にする？
 ・OpenID認証成功コールバック時にClaimed IDを保存する（signup_account.rb）
 　・ar-extensionsを使う
-・GET、POST等のHTTPメソッドに対応するメソッドをコントローラに追加する
-・エラー処理を検討する（OpenID認証失敗時など）
 ・テストツールを検討する
