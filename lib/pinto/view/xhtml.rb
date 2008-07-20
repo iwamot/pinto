@@ -14,11 +14,11 @@ module Pinto
 
       def evaluate(param)
         context = Erubis::Context.new(param)
-        context.extend Pinto::Helper::HTML
-        context.extend Pinto::Helper::URI
+        context.extend(Pinto::Helper::HTML)
+        context.extend(Pinto::Helper::URI)
 
         if param.has_key? :lang
-          context.extend Pinto::Helper::Translate
+          context.extend(Pinto::Helper::Translate)
           context.lang = param[:lang]
         end
 

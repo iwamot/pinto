@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pinto 0.0.1\n"
-"POT-Creation-Date: 2008-07-18 21:36+0900\n"
-"PO-Revision-Date: 2008-07-18 21:37+0900\n"
+"POT-Creation-Date: 2008-07-20 22:31+0900\n"
+"PO-Revision-Date: 2008-07-20 22:35+0900\n"
 "Last-Translator: IWAMOTO Takashi <hello@iwamot.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,11 +16,32 @@ msgstr ""
 # This file is distributed under the same license as the Pinto package.
 # IWAMOTO Takashi <hello@iwamot.com>, 2008.
 #
-#: lib/pinto/language.rb:14
+#: lib/pinto/controller/private/base.rb:28
+msgid "Requested HTTP method is invalid for this resource"
+msgstr "Requested HTTP method is invalid for this resource"
+
+#: lib/pinto/controller/signup_account.rb:19
+#: lib/pinto/controller/signup_auth.rb:27
+msgid "URI contains no valid language"
+msgstr "URI contains no valid language"
+
+#: lib/pinto/controller/signup_account.rb:26
+msgid "OpenID authentivation failed"
+msgstr "OpenID authentivation failed"
+
+#: lib/pinto/controller/signup_auth.rb:21
+msgid "Requested OpenID provider is not permitted"
+msgstr "Requested OpenID provider is not permitted"
+
+#: lib/pinto/dispatcher.rb:31
+msgid "Server error occurred"
+msgstr "Server error occurred"
+
+#: lib/pinto/language.rb:11
 msgid "English"
 msgstr "English"
 
-#: lib/pinto/language.rb:15
+#: lib/pinto/language.rb:12
 msgid "Japanese"
 msgstr "Japanese"
 
@@ -40,4 +61,3 @@ msgstr "OpenID Provider"
 #: view/signup_openid.erb:17
 msgid "OK"
 msgstr "OK"
-

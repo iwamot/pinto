@@ -4,11 +4,11 @@ module Pinto
   module Controller
     module Private
       class Error
-        def self.run(request, code)
+        def self.run(request, code, message)
           return [
             code,
-            {'Content-Type' => ''},
-            []
+            {'Content-Type' => 'text/plain'},
+            [message]
           ]
         end
       end

@@ -2,8 +2,10 @@
 
 require 'addressable/uri'
 require 'pinto/config'
+require 'pinto/controller/private/error'
 require 'pinto/pathname'
 require 'pinto/request'
+require 'pinto/translate'
 require 'pinto/uri/extract_processor'
 
 module Pinto
@@ -24,6 +26,10 @@ module Pinto
       path = Pathname.new("pinto/controller/#{request.controller}")
       require path
       return path.get_class.new.run(request)
+    rescue
+      translator = Pinto::Translate.new(request.uri_map['lang'])
+      message = translator._('Server error occurred')
+      return Pinto::Controller::Private::Error.run(request, 500, message)
     end
   end
 end

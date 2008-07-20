@@ -1,6 +1,7 @@
 # lib/pinto/controller/private/base.rb
 
 require 'pinto/controller/private/error'
+require 'pinto/translate'
 
 module Pinto
   module Controller
@@ -23,7 +24,11 @@ module Pinto
             return self.method(method).call(request)
           end
 
-          return Pinto::Controller::Private::Error.run(request, 405)
+          translator = Pinto::Translate.new(request.uri_map['lang'])
+          message = translator._(
+            'Requested HTTP method is invalid for this resource'
+          )
+          return Pinto::Controller::Private::Error.run(request, 405, message)
         end
 
         def options_action(request)

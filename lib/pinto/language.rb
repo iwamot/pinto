@@ -1,15 +1,12 @@
 # lib/pinto/language.rb
 
 require 'pinto/config'
-require 'pinto/helper/translate'
+require 'pinto/translate'
 
 module Pinto
   class Language
     def self.list(display_lang = 'en')
-      translator = Class.new
-      translator.extend Pinto::Helper::Translate
-      translator.lang = display_lang
-
+      translator = Pinto::Translate.new(display_lang)
       return [
         {'code' => 'en', 'name' => translator._('English')},
         {'code' => 'ja', 'name' => translator._('Japanese')}

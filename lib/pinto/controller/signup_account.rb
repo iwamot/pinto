@@ -5,6 +5,7 @@ require 'pinto/controller/private/base'
 require 'pinto/controller/private/error'
 require 'pinto/helper/uri'
 require 'pinto/openid'
+require 'pinto/translate'
 
 module Pinto
   module Controller
@@ -14,12 +15,16 @@ module Pinto
       def get_action(request)
         request_lang = request.uri_map['lang']
         if request_lang.empty?
-          return Pinto::Controller::Private::Error.run(request, 400)
+          translator = Pinto::Translate.new(request_lang)
+          message = translator._('URI contains no valid language')
+          return Pinto::Controller::Private::Error.run(request, 400, message)
         end
 
         claimed_id = Pinto::OpenID.complete(request.GET, request.url)
         if claimed_id.nil?
-          return Pinto::Controller::Private::Error.run(request, 400)
+          translator = Pinto::Translate.new(request_lang)
+          message = translator._('OpenID authentivation failed')
+          return Pinto::Controller::Private::Error.run(request, 400, message)
         end
 
         return [

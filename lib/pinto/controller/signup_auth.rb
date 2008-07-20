@@ -4,6 +4,7 @@ require 'pinto/config'
 require 'pinto/controller/private/base'
 require 'pinto/controller/private/error'
 require 'pinto/openid'
+require 'pinto/translate'
 
 module Pinto
   module Controller
@@ -11,15 +12,20 @@ module Pinto
       include Pinto::Controller::Private::Base
 
       def get_action(request)
+        request_lang = request.uri_map['lang']
         openid = request.GET['openid']
+
         providers = Pinto::Config.load('openid_providers')
         unless providers.include? openid
-          return Pinto::Controller::Private::Error.run(request, 400)
+          translator = Pinto::Translate.new(request_lang)
+          message = translator._('Requested OpenID provider is not permitted')
+          return Pinto::Controller::Private::Error.run(request, 400, message)
         end
 
-        request_lang = request.uri_map['lang']
         if request_lang.empty?
-          return Pinto::Controller::Private::Error.run(request, 400)
+          translator = Pinto::Translate.new(request_lang)
+          message = translator._('URI contains no valid language')
+          return Pinto::Controller::Private::Error.run(request, 400, message)
         end
 
         redirect_url = Pinto::OpenID::begin(openid, request_lang)
