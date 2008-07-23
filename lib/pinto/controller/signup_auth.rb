@@ -1,11 +1,5 @@
 # lib/pinto/controller/signup_auth.rb
 
-require 'pinto/config'
-require 'pinto/controller/private/base'
-require 'pinto/controller/private/error'
-require 'pinto/openid'
-require 'pinto/translate'
-
 module Pinto
   module Controller
     class SignupAuth

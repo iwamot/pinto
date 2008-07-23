@@ -1,8 +1,5 @@
 # lib/pinto/controller/private/base.rb
 
-require 'pinto/controller/private/error'
-require 'pinto/translate'
-
 module Pinto
   module Controller
     module Private

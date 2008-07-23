@@ -1,8 +1,5 @@
 # lib/pinto/language.rb
 
-require 'pinto/config'
-require 'pinto/translate'
-
 module Pinto
   class Language
     def self.list(display_lang = 'en')

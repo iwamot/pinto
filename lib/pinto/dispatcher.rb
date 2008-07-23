@@ -1,13 +1,5 @@
 # lib/pinto/dispatcher.rb
 
-require 'addressable/uri'
-require 'pinto/config'
-require 'pinto/controller/private/error'
-require 'pinto/pathname'
-require 'pinto/request'
-require 'pinto/translate'
-require 'pinto/uri/extract_processor'
-
 module Pinto
   class Dispatcher
     def call(env)

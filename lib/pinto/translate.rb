@@ -1,7 +1,5 @@
 # lib/pinto/translate.rb
 
-require 'pinto/helper/translate'
-
 module Pinto
   class Translate
     attr_accessor :translator

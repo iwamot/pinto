@@ -1,7 +1,5 @@
 # lib/pinto/uri/extract_processor.rb
 
-require 'rack'
-
 module Pinto
   module URI
     class ExtractProcessor

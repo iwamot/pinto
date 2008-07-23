@@ -1,7 +1,5 @@
 # lib/pinto/request.rb
 
-require 'rack'
-
 module Pinto
   class Request < Rack::Request
     attr_accessor :controller

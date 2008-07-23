@@ -1,10 +1,5 @@
 # lib/pinto/view/xhtml.rb
 
-require 'erubis'
-require 'pinto/helper/html'
-require 'pinto/helper/translate'
-require 'pinto/helper/uri'
-
 module Pinto
   class View
     class XHTML < Erubis::EscapedEruby

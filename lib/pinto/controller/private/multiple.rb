@@ -1,9 +1,5 @@
 # lib/pinto/controller/private/multiple.rb
 
-require 'pinto/config'
-require 'pinto/language'
-require 'pinto/view'
-
 module Pinto
   module Controller
     module Private

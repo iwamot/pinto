@@ -1,7 +1,5 @@
 # lib/pinto/config.rb
 
-require 'yaml'
-
 module Pinto
   class Config
     def self.load(key = nil)
@@ -10,7 +8,7 @@ module Pinto
       return config
     end
 
-    def db()
+    def self.db
       return YAML.load_file('config/db.yml')
     end
   end

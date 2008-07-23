@@ -1,9 +1,5 @@
 # lib/pinto/helper/uri.rb
 
-require 'addressable/uri'
-require 'pinto/config'
-require 'pinto/uri/expand_processor'
-
 module Pinto
   module Helper
     module URI

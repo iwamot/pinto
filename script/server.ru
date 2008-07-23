@@ -8,5 +8,5 @@
 use Rack::Reloader, 1
 
 $LOAD_PATH << 'lib'
-require 'pinto/dispatcher'
+require 'pinto'
 run Pinto::Dispatcher.new

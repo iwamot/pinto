@@ -1,11 +1,5 @@
 # lib/pinto/controller/index.rb
 
-require 'pinto/controller/private/base'
-require 'pinto/controller/private/multiple'
-require 'pinto/helper/uri'
-require 'pinto/language'
-require 'pinto/view'
-
 module Pinto
   module Controller
     class Index

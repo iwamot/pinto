@@ -1,7 +1,5 @@
 # lib/pinto/helper/html.rb
 
-require 'pinto/encoding/utf8'
-
 module Pinto
   module Helper
     module HTML

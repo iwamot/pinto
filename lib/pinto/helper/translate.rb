@@ -1,7 +1,5 @@
 # lib/pinto/view/translate.rb
 
-require 'gettext'
-
 module Pinto
   module Helper
     module Translate

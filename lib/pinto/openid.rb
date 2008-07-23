@@ -1,9 +1,5 @@
 # lib/pinto/openid.rb
 
-require 'openid'
-require 'openid/store/filesystem'
-require 'pinto/helper/uri'
-
 module Pinto
   class OpenID
     def self.begin(openid, lang)
