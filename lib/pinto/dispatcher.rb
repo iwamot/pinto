@@ -26,10 +26,13 @@ module Pinto
       path = Pathname.new("pinto/controller/#{request.controller}")
       require path
       return path.get_class.new.run(request)
-    rescue
+=begin
+    rescue => exception
       translator = Pinto::Translate.new(request.uri_map['lang'])
       message = translator._('Server error occurred')
+      message = exception.message
       return Pinto::Controller::Private::Error.run(request, 500, message)
+=end
     end
   end
 end

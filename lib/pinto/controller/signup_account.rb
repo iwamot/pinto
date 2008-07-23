@@ -4,6 +4,7 @@ require 'pinto/config'
 require 'pinto/controller/private/base'
 require 'pinto/controller/private/error'
 require 'pinto/helper/uri'
+require 'pinto/model/signup_reservation'
 require 'pinto/openid'
 require 'pinto/translate'
 
@@ -26,6 +27,8 @@ module Pinto
           message = translator._('OpenID authentivation failed')
           return Pinto::Controller::Private::Error.run(request, 400, message)
         end
+
+        Pinto::Model::SignupReservation.add(claimed_id)
 
         return [
           200,

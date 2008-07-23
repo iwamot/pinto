@@ -1,4 +1,5 @@
-・OpenID認証成功コールバック時にClaimed IDを保存する（signup_account.rb）
-　・ar-extensionsを使う
 ・テストツールを検討する
 ・ビューのLayout対応
+・コントローラが見つからなければ404を返す
+・開発中フラグの導入
+・require 'rubygems'（autoload）
