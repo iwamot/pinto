@@ -1,4 +1,4 @@
-# lib/pinto/controller/signup_auth.rb
+# lib/pinto/controller/signup_account.rb
 
 module Pinto
   module Controller
@@ -22,10 +22,18 @@ module Pinto
 
         Pinto::Model::SignupReservation.add(claimed_id)
 
+        other_languages = Pinto::Language.get_other(request_lang)
+        param = {
+          :lang        => request_lang,
+          :claimed_id   => claimed_id
+        }
+
+        response_body = Pinto::View.render('signup_account', param)
+
         return [
           200,
-          {'Content-Type' => 'text/plain; charset=UTF-8'},
-          [claimed_id]
+          {'Content-Type' => 'application/xhtml+xml; charset=UTF-8'},
+          [response_body]
         ]
       end
     end

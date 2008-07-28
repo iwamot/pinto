@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%== in_quote(@lang) %>">
+<head>
+<title>Pinto</title>
+</head>
+<body>
+<h1><a rel="start" href="<%== in_quote(uri('index', 'lang' => @lang)) %>">Pinto</a></h1>
+<form method="post" action="<%== in_quote(uri('users', 'lang' => @lang)) %>">
+<p>
+<%= _('User Name') %>:
+<input type="text" name="user_name" value="" />
+<input type="submit" value="<%== in_quote(_('OK')) %>" />
+<input type="hidden" name="claimed_id" value="<%== in_quote(@claimed_id) %>" />
+</p>
+</form>
+</body>
+</html>
