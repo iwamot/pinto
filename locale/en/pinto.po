@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pinto 0.0.1\n"
-"POT-Creation-Date: 2008-07-20 22:31+0900\n"
-"PO-Revision-Date: 2008-07-20 22:35+0900\n"
+"POT-Creation-Date: 2008-07-28 21:59+0900\n"
+"PO-Revision-Date: 2008-07-28 22:00+0900\n"
 "Last-Translator: IWAMOTO Takashi <hello@iwamot.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,32 +16,28 @@ msgstr ""
 # This file is distributed under the same license as the Pinto package.
 # IWAMOTO Takashi <hello@iwamot.com>, 2008.
 #
-#: lib/pinto/controller/private/base.rb:28
+#: lib/pinto/controller/private/base.rb:25
 msgid "Requested HTTP method is invalid for this resource"
 msgstr "Requested HTTP method is invalid for this resource"
 
-#: lib/pinto/controller/signup_account.rb:19
-#: lib/pinto/controller/signup_auth.rb:27
+#: lib/pinto/controller/signup_account.rb:12
+#: lib/pinto/controller/signup_auth.rb:21
 msgid "URI contains no valid language"
 msgstr "URI contains no valid language"
 
-#: lib/pinto/controller/signup_account.rb:26
+#: lib/pinto/controller/signup_account.rb:19
 msgid "OpenID authentivation failed"
 msgstr "OpenID authentivation failed"
 
-#: lib/pinto/controller/signup_auth.rb:21
+#: lib/pinto/controller/signup_auth.rb:15
 msgid "Requested OpenID provider is not permitted"
 msgstr "Requested OpenID provider is not permitted"
 
-#: lib/pinto/dispatcher.rb:31
-msgid "Server error occurred"
-msgstr "Server error occurred"
-
-#: lib/pinto/language.rb:11
+#: lib/pinto/language.rb:8
 msgid "English"
 msgstr "English"
 
-#: lib/pinto/language.rb:12
+#: lib/pinto/language.rb:9
 msgid "Japanese"
 msgstr "Japanese"
 
@@ -54,10 +50,19 @@ msgstr "Sign Up"
 msgid "%{language} version of this page"
 msgstr "%{language} version of this page"
 
+#: view/signup_account.erb:11
+msgid "User Name"
+msgstr "User Name"
+
+#: view/signup_account.erb:13
+#: view/signup_openid.erb:17
+msgid "OK"
+msgstr "OK"
+
 #: view/signup_openid.erb:11
 msgid "OpenID Provider"
 msgstr "OpenID Provider"
 
-#: view/signup_openid.erb:17
-msgid "OK"
-msgstr "OK"
+#~ msgid "Server error occurred"
+#~ msgstr "Server error occurred"
+
