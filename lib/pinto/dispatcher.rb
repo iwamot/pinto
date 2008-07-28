@@ -15,6 +15,10 @@ module Pinto
         end
       end
 
+      if request.controller.nil?
+        return Pinto::Controller::Private::Error.run(request, 404)
+      end
+
       path = Pathname.new("pinto/controller/#{request.controller}")
       require path
       return path.get_class.new.run(request)

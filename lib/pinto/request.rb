@@ -6,7 +6,7 @@ module Pinto
     attr_accessor :uri_map
 
     def initialize(env)
-      @controller = 'not_found'
+      @controller = nil
       @uri_map    = {}
       super(env)
     end
