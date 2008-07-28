@@ -16,7 +16,7 @@ module Pinto
         claimed_id = Pinto::OpenID.complete(request.GET, request.url)
         if claimed_id.nil?
           translator = Pinto::Translate.new(request_lang)
-          message = translator._('OpenID authentivation failed')
+          message = translator._('OpenID authentication failed')
           return Pinto::Controller::Private::Error.run(request, 400, message)
         end
 

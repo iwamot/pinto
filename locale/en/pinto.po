@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pinto 0.0.1\n"
-"POT-Creation-Date: 2008-07-28 21:59+0900\n"
-"PO-Revision-Date: 2008-07-28 22:00+0900\n"
+"POT-Creation-Date: 2008-07-28 22:47+0900\n"
+"PO-Revision-Date: 2008-07-28 22:49+0900\n"
 "Last-Translator: IWAMOTO Takashi <hello@iwamot.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,8 +26,8 @@ msgid "URI contains no valid language"
 msgstr "URI contains no valid language"
 
 #: lib/pinto/controller/signup_account.rb:19
-msgid "OpenID authentivation failed"
-msgstr "OpenID authentivation failed"
+msgid "OpenID authentication failed"
+msgstr "OpenID authentication failed"
 
 #: lib/pinto/controller/signup_auth.rb:15
 msgid "Requested OpenID provider is not permitted"
