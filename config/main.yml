@@ -4,7 +4,7 @@ uri_templates:
   signup_auth:    http://{lang}pinto.jp/signup_forms/auth{query}
   signup_account: http://{lang}pinto.jp/signup_forms/account{query}
   users:          http://{lang}pinto.jp/users
-  user:           http://{lang}pinto.jp/users/{username}
+  user:           http://{lang}pinto.jp/users/{user_name}
 
 openid_providers:
   - yahoo.com

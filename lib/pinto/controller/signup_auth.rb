@@ -22,11 +22,11 @@ module Pinto
           return Pinto::Controller::Private::Error.run(request, 400, message)
         end
 
-        redirect_url = Pinto::OpenID::begin(openid, request_lang)
+        redirect_uri = Pinto::OpenID::begin(openid, request_lang)
 
         return [
           303,
-          {'Location' => redirect_url, 'Content-Type' => ''},
+          {'Location' => redirect_uri, 'Content-Type' => ''},
           []
         ]
       end

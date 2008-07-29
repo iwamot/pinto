@@ -63,6 +63,7 @@ module Pinto
 
   module Model
     autoload :SignupReservation, 'pinto/model/signup_reservation'
+    autoload :User,              'pinto/model/user'
   end
 
   module URI

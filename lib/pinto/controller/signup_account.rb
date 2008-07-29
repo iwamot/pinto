@@ -24,8 +24,8 @@ module Pinto
 
         other_languages = Pinto::Language.get_other(request_lang)
         param = {
-          :lang        => request_lang,
-          :claimed_id   => claimed_id
+          :lang       => request_lang,
+          :claimed_id => claimed_id
         }
 
         response_body = Pinto::View.render('signup_account', param)

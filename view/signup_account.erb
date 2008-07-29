@@ -6,10 +6,11 @@
 </head>
 <body>
 <h1><a rel="start" href="<%== in_quote(uri('index', 'lang' => @lang)) %>">Pinto</a></h1>
+<% unless @error_message.nil? %><p><%= @error_message %></p><% end %>
 <form method="post" action="<%== in_quote(uri('users', 'lang' => @lang)) %>">
 <p>
 <%= _('User Name') %>:
-<input type="text" name="user_name" value="" />
+<input type="text" name="user_name" value="<%== in_quote(@user_name) %>" />
 <input type="submit" value="<%== in_quote(_('OK')) %>" />
 <input type="hidden" name="claimed_id" value="<%== in_quote(@claimed_id) %>" />
 </p>
