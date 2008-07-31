@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pinto 0.0.1\n"
-"POT-Creation-Date: 2008-07-28 22:47+0900\n"
-"PO-Revision-Date: 2008-07-28 22:49+0900\n"
+"POT-Creation-Date: 2008-07-31 21:11+0900\n"
+"PO-Revision-Date: 2008-07-31 21:12+0900\n"
 "Last-Translator: IWAMOTO Takashi <hello@iwamot.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -41,8 +41,17 @@ msgstr "英語"
 msgid "Japanese"
 msgstr "日本語"
 
+#: lib/pinto/model/user.rb:9
+msgid "%{param} is required"
+msgstr "%{param}は必須です"
+
+#: lib/pinto/model/user.rb:10
+#: view/signup_account.erb:12
+msgid "User name"
+msgstr "ユーザー名"
+
 #: view/index.erb:10
-msgid "Sign Up"
+msgid "Sign up"
 msgstr "ユーザー登録"
 
 #: view/index.erb:12
@@ -50,17 +59,13 @@ msgstr "ユーザー登録"
 msgid "%{language} version of this page"
 msgstr "このページの%{language}版"
 
-#: view/signup_account.erb:11
-msgid "User Name"
-msgstr "ユーザー名"
-
-#: view/signup_account.erb:13
+#: view/signup_account.erb:14
 #: view/signup_openid.erb:17
 msgid "OK"
 msgstr "OK"
 
 #: view/signup_openid.erb:11
-msgid "OpenID Provider"
+msgid "OpenID provider"
 msgstr "OpenIDプロバイダ"
 
 #~ msgid "Server error occurred"

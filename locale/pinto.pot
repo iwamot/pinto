@@ -4,8 +4,8 @@
 # IWAMOTO Takashi <hello@iwamot.com>, 2008.
 #
 "Project-Id-Version:  Pinto 0.0.1\n"
-"POT-Creation-Date: 2008-07-28 22:47+0900\n"
-"PO-Revision-Date: 2008-07-28 22:47+0900\n"
+"POT-Creation-Date: 2008-07-31 21:11+0900\n"
+"PO-Revision-Date: 2008-07-31 21:11+0900\n"
 "Last-Translator: IWAMOTO Takashi <hello@iwamot.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -37,22 +37,26 @@ msgstr ""
 msgid "Japanese"
 msgstr ""
 
+#: lib/pinto/model/user.rb:9
+msgid "%{param} is required"
+msgstr ""
+
+#: lib/pinto/model/user.rb:10 view/signup_account.erb:12
+msgid "User name"
+msgstr ""
+
 #: view/index.erb:10
-msgid "Sign Up"
+msgid "Sign up"
 msgstr ""
 
 #: view/index.erb:12 view/signup_openid.erb:22
 msgid "%{language} version of this page"
 msgstr ""
 
-#: view/signup_account.erb:11
-msgid "User Name"
-msgstr ""
-
-#: view/signup_account.erb:13 view/signup_openid.erb:17
+#: view/signup_account.erb:14 view/signup_openid.erb:17
 msgid "OK"
 msgstr ""
 
 #: view/signup_openid.erb:11
-msgid "OpenID Provider"
+msgid "OpenID provider"
 msgstr ""

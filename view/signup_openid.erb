@@ -8,7 +8,7 @@
 <h1><a rel="start" href="<%== in_quote(uri('index', 'lang' => @lang)) %>">Pinto</a></h1>
 <form method="get" action="<%== in_quote(uri('signup_auth', 'lang' => @lang)) %>">
 <p>
-<%= _('OpenID Provider') %>:
+<%= _('OpenID provider') %>:
 <select name="openid">
 <% @providers.each do |provider| %>
 <option value="<%== in_quote(provider) %>"><%= provider %></option>
