@@ -4,6 +4,10 @@ module Pinto
   module Encoding
     class UTF8
       def self.valid?(value)
+        unless value.is_a? String
+          raise ArgumentError.new('value must be String')
+        end
+
         valid_utf8 = /^(?:
            [\x00-\x7F]                    # U+0000   - U+007F
           |[\xC2-\xDF][\x80-\xBF]         # U+0080   - U+07FF
@@ -15,7 +19,7 @@ module Pinto
           |[\xF1-\xF3][\x80-\xBF]{3}      # U+40000  - U+FFFFF
           |\xF4[\x80-\x8F][\x80-\xBF]{2}  # U+100000 - U+10FFFF
         )*$/x
-        return !value.to_s.match(valid_utf8).nil?
+        return !value.match(valid_utf8).nil?
       end
     end
   end

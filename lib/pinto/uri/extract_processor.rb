@@ -4,6 +4,10 @@ module Pinto
   module URI
     class ExtractProcessor
       def self.match(name)
+        unless name.is_a? String
+          raise ArgumentError.new('name must be String')
+        end
+
         return 'ja\.|en\.|'      if name == 'lang'
         return '\?.+|'           if name == 'query'
         return '[0-9a-zA-Z_\-]+' if name == 'username'
@@ -11,6 +15,13 @@ module Pinto
       end
 
       def self.restore(name, value)
+        unless name.is_a? String
+          raise ArgumentError.new('name must be String')
+        end
+        unless value.is_a? String
+          raise ArgumentError.new('value must be String')
+        end
+
         case name
         when 'lang'
           restore_value = value.gsub(/\.$/, '')

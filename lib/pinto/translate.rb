@@ -2,15 +2,21 @@
 
 module Pinto
   class Translate
-    attr_accessor :translator
-
     def initialize(lang)
+      unless lang.is_a? Pinto::Type::Language
+        raise ArgumentError.new('lang must be Pinto::Type::Language')
+      end
+
       @translator = Class.new
       @translator.extend(Pinto::Helper::Translate)
-      @translator.lang = lang
+      @translator.set_language(lang)
     end
 
     def _(message_id)
+      unless message_id.is_a? String
+        raise ArgumentError.new('message_id must be String')
+      end
+
       return @translator._(message_id)
     end
   end

@@ -31,7 +31,7 @@ module Pinto
   autoload :Config,     'pinto/config'
   autoload :Dispatcher, 'pinto/dispatcher'
   autoload :Language,   'pinto/language'
-  autoload :OpenID,     'pinto/openid'
+  autoload :OpenID,     'pinto/open_id'
   autoload :Request,    'pinto/request'
   autoload :Translate,  'pinto/translate'
   autoload :View,       'pinto/view'
@@ -64,6 +64,23 @@ module Pinto
   module Model
     autoload :SignupReservation, 'pinto/model/signup_reservation'
     autoload :User,              'pinto/model/user'
+  end
+
+  module Type
+    autoload :ClaimedID,      'pinto/type/claimed_id'
+    autoload :ConfigKey,      'pinto/type/config_key'
+    autoload :ControllerName, 'pinto/type/controller_name'
+    autoload :EscapeChars,    'pinto/type/escape_chars'
+    autoload :ErrorMessage,   'pinto/type/error_message'
+    autoload :HttpStatusCode, 'pinto/type/http_status_code'
+    autoload :Language,       'pinto/type/language'
+    autoload :QueryStrings,   'pinto/type/query_strings'
+    autoload :URI,            'pinto/type/uri'
+    autoload :UriMap,         'pinto/type/uri_map'
+    autoload :UserName,       'pinto/type/user_name'
+    autoload :UserSuppliedID, 'pinto/type/user_supplied_id'
+    autoload :ViewName,       'pinto/type/view_name'
+    autoload :ViewParam,      'pinto/type/view_param'
   end
 
   module URI

@@ -5,17 +5,23 @@ module Pinto
     module Private
       class Multiple
         def self.run(request)
+          unless request.is_a? Pinto::Request
+            raise ArgumentError.new('request must be Pinto::Request')
+          end
+
           languages = Pinto::Language.list
-          uri_map = request.uri_map
+          uri_map = request.get_uri_map.to_hash
           uri_map.delete('lang')
 
           param = {
-            :controller => request.controller,
+            :controller => request.get_controller_name.to_s,
             :languages  => languages,
             :uri_map    => uri_map
           }
 
-          response_body = Pinto::View.render('multiple', param)
+          view_name  = Pinto::Type::ViewName.new('multiple')
+          view_param = Pinto::Type::ViewParam.new(param)
+          response_body = Pinto::View.render(view_name, view_param)
 
           return [
             300,

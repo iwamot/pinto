@@ -6,13 +6,20 @@ module Pinto
       include Pinto::Controller::Private::Base
 
       def get_action(request)
-        request_lang = request.uri_map['lang']
+        unless request.is_a? Pinto::Request
+          raise ArgumentError.new('request must be Pinto::Request')
+        end
+
+        request_lang = request.get_uri_map.to_hash['lang']
         if request_lang.empty?
           return Pinto::Controller::Private::Multiple.run(request)
         end
 
-        other_languages = Pinto::Language.get_other(request_lang)
-        providers       = Pinto::Config.load('openid_providers')
+        base_lang = Pinto::Type::Language.new(request_lang)
+        other_languages = Pinto::Language.get_other(base_lang)
+
+        config_key = Pinto::Type::ConfigKey.new('openid_providers')
+        providers = Pinto::Config.load(config_key)
 
         param = {
           :lang        => request_lang,
@@ -20,7 +27,9 @@ module Pinto
           :providers   => providers
         }
 
-        response_body = Pinto::View.render('signup_openid', param)
+        view_name  = Pinto::Type::ViewName.new('signup_openid')
+        view_param = Pinto::Type::ViewParam.new(param)
+        response_body = Pinto::View.render(view_name, view_param)
 
         platonic_uri = Pinto::Helper::URI.uri('signup_openid')
 

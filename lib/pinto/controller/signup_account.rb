@@ -6,29 +6,53 @@ module Pinto
       include Pinto::Controller::Private::Base
 
       def get_action(request)
-        request_lang = request.uri_map['lang']
+        unless request.is_a? Pinto::Request
+          raise ArgumentError.new('request must be Pinto::Request')
+        end
+
+        request_lang = request.get_uri_map.to_hash['lang']
         if request_lang.empty?
-          translator = Pinto::Translate.new(request_lang)
+          http_status_code = Pinto::Type::HttpStatusCode.new(400)
+          translator = Pinto::Translate.new(
+            Pinto::Type::Language.new(request_lang)
+          )
           message = translator._('URI contains no valid language')
-          return Pinto::Controller::Private::Error.run(request, 400, message)
+          message = Pinto::Type::ErrorMessage.new(message)
+          return Pinto::Controller::Private::Error.run(
+            request, http_status_code, message
+          )
         end
 
-        claimed_id = Pinto::OpenID.complete(request.GET, request.url)
+        query_strings = Pinto::Type::QueryStrings.new(request.GET)
+        current_uri   = Pinto::Type::URI.new(request.url)
+        claimed_id = Pinto::OpenID.complete(query_strings, current_uri)
         if claimed_id.nil?
-          translator = Pinto::Translate.new(request_lang)
+          http_status_code = Pinto::Type::HttpStatusCode.new(400)
+          translator = Pinto::Translate.new(
+            Pinto::Type::Language.new(request_lang)
+          )
           message = translator._('OpenID authentication failed')
-          return Pinto::Controller::Private::Error.run(request, 400, message)
+          message = Pinto::Type::ErrorMessage.new(message)
+          return Pinto::Controller::Private::Error.run(
+            request, http_status_code, message
+          )
         end
 
-        Pinto::Model::SignupReservation.add(claimed_id)
+        Pinto::Model::SignupReservation.add(
+          Pinto::Type::ClaimedID.new(claimed_id)
+        )
 
-        other_languages = Pinto::Language.get_other(request_lang)
+        base_lang = Pinto::Type::Language.new(request_lang)
+        other_languages = Pinto::Language.get_other(base_lang)
         param = {
           :lang       => request_lang,
-          :claimed_id => claimed_id
+          :claimed_id => claimed_id,
+          :user_name  => ''
         }
 
-        response_body = Pinto::View.render('signup_account', param)
+        view_name  = Pinto::Type::ViewName.new('signup_account')
+        view_param = Pinto::Type::ViewParam.new(param)
+        response_body = Pinto::View.render(view_name, view_param)
 
         return [
           200,

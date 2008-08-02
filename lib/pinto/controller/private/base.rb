@@ -5,6 +5,10 @@ module Pinto
     module Private
       module Base
         def run(request)
+          unless request.is_a? Pinto::Request
+            raise ArgumentError.new('request must be Pinto::Request')
+          end
+
           if request.get? || request.head?
             method = 'get_action'
           elsif request.post?
@@ -21,14 +25,22 @@ module Pinto
             return self.method(method).call(request)
           end
 
-          translator = Pinto::Translate.new(request.uri_map['lang'])
+          http_status_code = Pinto::Type::HttpStatusCode.new(405)
+          translator = Pinto::Translate.new(request.get_uri_map['lang'])
           message = translator._(
             'Requested HTTP method is invalid for this resource'
           )
-          return Pinto::Controller::Private::Error.run(request, 405, message)
+          message = Pinto::Type::ErrorMessage.new(message)
+          return Pinto::Controller::Private::Error.run(
+            request, http_status_code, message
+          )
         end
 
         def options_action(request)
+          unless request.is_a? Pinto::Request
+            raise ArgumentError.new('request must be Pinto::Request')
+          end
+
           allowed_methods = []
           if self.methods.include? 'get_action'
             allowed_methods.push('GET')

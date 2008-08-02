@@ -3,31 +3,45 @@
 module Pinto
   class Dispatcher
     def call(env)
+      unless env.is_a? Hash
+        raise ArgumentError.new('env must be Hash')
+      end
+
       request = Pinto::Request.new(env)
       uri = Addressable::URI.parse(request.url)
 
-      Pinto::Config.load('uri_templates').each do |controller, template|
+      config_key = Pinto::Type::ConfigKey.new('uri_templates')
+      Pinto::Config.load(config_key).each do |controller, template|
         uri_map = uri.extract_mapping(template, Pinto::URI::ExtractProcessor)
         unless uri_map.nil?
-          request.controller = controller
-          request.uri_map    = uri_map
+          controller_name = Pinto::Type::ControllerName.new(controller)
+          request.set_controller_name(controller_name)
+
+          uri_map = Pinto::Type::UriMap.new(uri_map)
+          request.set_uri_map(uri_map)
           break
         end
       end
 
-      if request.controller.nil?
-        return Pinto::Controller::Private::Error.run(request, 404)
+      if request.get_controller_name.to_s.empty?
+        http_status_code = Pinto::Type::HttpStatusCode.new(404)
+        return Pinto::Controller::Private::Error.run(request, http_status_code)
       end
 
-      path = Pathname.new("pinto/controller/#{request.controller}")
+      controller_name = request.get_controller_name.to_s
+      path = Pathname.new("pinto/controller/#{controller_name}")
       require path
       return path.get_class.new.run(request)
+
 =begin
     rescue => exception
-      translator = Pinto::Translate.new(request.uri_map['lang'])
-      message = translator._('Server error occurred')
-      message = exception.message
-      return Pinto::Controller::Private::Error.run(request, 500, message)
+      http_status_code = Pinto::Type::HttpStatusCode.new(500)
+      translator = Pinto::Translate.new(request.get_uri_map['lang'])
+#      message = translator._('Server error occurred')
+      message = Pinto::Type::ErrorMessage.new(exception.message)
+      return Pinto::Controller::Private::Error.run(
+        request, http_status_code, message
+      )
 =end
     end
   end

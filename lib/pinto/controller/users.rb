@@ -6,21 +6,30 @@ module Pinto
       include Pinto::Controller::Private::Base
 
       def post_action(request)
-        request_lang = request.uri_map['lang']
+        unless request.is_a? Pinto::Request
+          raise ArgumentError.new('request must be Pinto::Request')
+        end
+
+        request_lang = request.get_uri_map.to_hash['lang']
         user_name    = request.POST['user_name']
         claimed_id   = request.POST['claimed_id']
 
+=begin
         begin
-          Pinto::Model::User.add(user_name, claimed_id, request_lang)
+          Pinto::Model::User.add(user_name, claimed_id)
         rescue => e
-          other_languages = Pinto::Language.get_other(request_lang)
+          base_lang = Pinto::Type::Language.new(request_lang)
+          other_languages = Pinto::Language.get_other(base_lang)
           param = {
             :lang          => request_lang,
             :user_name     => user_name,
             :claimed_id    => claimed_id,
             :error_message => e.message
           }
-          response_body = Pinto::View.render('signup_account', param)
+
+          view_name  = Pinto::Type::ViewName.new('signup_account')
+          view_param = Pinto::Type::ViewParam.new(param)
+          response_body = Pinto::View.render(view_name, view_param)
 
           return [
             400,
@@ -28,6 +37,7 @@ module Pinto
             [response_body]
           ]
         end
+=end
 
         param = {
           'lang'      => request_lang,
