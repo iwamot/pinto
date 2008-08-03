@@ -16,7 +16,7 @@ module Pinto
         end
 
         base_lang = Pinto::Type::Language.new(request_lang)
-        other_languages = Pinto::Language.get_other(base_lang)
+        other_languages = Pinto::Language.others(base_lang)
         param = {
           :lang        => request_lang,
           :other_langs => other_languages

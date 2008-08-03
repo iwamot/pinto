@@ -16,7 +16,7 @@ module Pinto
         end
 
         base_lang = Pinto::Type::Language.new(request_lang)
-        other_languages = Pinto::Language.get_other(base_lang)
+        other_languages = Pinto::Language.others(base_lang)
 
         config_key = Pinto::Type::ConfigKey.new('openid_providers')
         providers = Pinto::Config.load(config_key)

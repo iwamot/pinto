@@ -43,7 +43,7 @@ module Pinto
         )
 
         base_lang = Pinto::Type::Language.new(request_lang)
-        other_languages = Pinto::Language.get_other(base_lang)
+        other_languages = Pinto::Language.others(base_lang)
         param = {
           :lang       => request_lang,
           :claimed_id => claimed_id,

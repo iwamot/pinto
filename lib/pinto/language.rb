@@ -2,7 +2,9 @@
 
 module Pinto
   class Language
-    def self.list(lang = Pinto::Type::Language.new('en'))
+    DEFAULT_LANGUAGE = 'en'
+
+    def self.list(lang = Pinto::Type::Language.new(DEFAULT_LANGUAGE))
       unless lang.is_a? Pinto::Type::Language
         raise ArgumentError.new('lang must be Pinto::Type::Language')
       end
@@ -14,7 +16,7 @@ module Pinto
       ]
     end
 
-    def self.get_other(base_lang)
+    def self.others(base_lang)
       unless base_lang.is_a? Pinto::Type::Language
         raise ArgumentError.new('base_lang must be Pinto::Type::Language')
       end
