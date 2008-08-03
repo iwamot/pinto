@@ -30,7 +30,6 @@ module Pinto
 
       controller_name = request.get_controller_name.to_s
       path = Pathname.new("pinto/controller/#{controller_name}")
-      require path
       return path.get_class.new.run(request)
 
 =begin
