@@ -12,7 +12,7 @@ module Pinto
         raise ArgumentError.new('lang must be Pinto::Type::Language')
       end
 
-      request = self.consumer().begin(user_supplied_id.to_s)
+      request = self.consumer.begin(user_supplied_id.to_s)
 
       realm     = Pinto::Helper::URI.uri('index',          'lang' => lang.to_s)
       return_to = Pinto::Helper::URI.uri('signup_account', 'lang' => lang.to_s)
@@ -28,7 +28,7 @@ module Pinto
         raise ArgumentError.new('uri must be Pinto::Type::URI')
       end
 
-      response = self.consumer().complete(query.to_hash, uri.to_s)
+      response = self.consumer.complete(query.to_hash, uri.to_s)
       unless response.is_a? ::OpenID::Consumer::SuccessResponse
         return nil
       end

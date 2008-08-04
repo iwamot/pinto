@@ -14,9 +14,5 @@ module Pinto
 
       return config[key.to_s]
     end
-
-    def self.db
-      return YAML.load_file('config/db.yml')
-    end
   end
 end

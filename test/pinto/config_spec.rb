@@ -21,10 +21,3 @@ describe 'Pinto::Config.load' do
     openid_providers.should include('yahoo.com')
   end
 end
-
-describe 'Pinto::Config.db' do
-  it 'should be able to load values from db config file' do
-    db_setting = Pinto::Config.db
-    db_setting['name'].should == 'pinto'
-  end
-end

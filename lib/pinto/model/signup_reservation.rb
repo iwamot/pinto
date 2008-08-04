@@ -8,11 +8,13 @@ module Pinto
           raise ArgumentError.new('claimed_id must be Pinto::Type::ClaimedID')
         end
 
-        db_info = Pinto::Config.db
+        db_config = Pinto::Config::DB.load
 
         begin
-          dsn = 'dbi:Mysql:%s:%s' % [db_info['name'], db_info['host']]
-          dbh = DBI.connect(dsn, db_info['user'], db_info['password'])
+          dsn = 'dbi:Mysql:%s:%s' % [db_config.name.to_s, db_config.host.to_s]
+          dbh = DBI.connect(dsn,
+                            db_config.user.to_s,
+                            db_config.password.to_s)
           dbh.do('INSERT INTO signup_reservations (claimed_id, reserved_at) ' +
                  'VALUES (?, NOW()) ' +
                  'ON DUPLICATE KEY UPDATE reserved_at = NOW()',
