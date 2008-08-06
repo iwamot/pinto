@@ -36,7 +36,7 @@ module Pinto
         end
 
         user_supplied_id = Pinto::Type::UserSuppliedID.new(openid)
-        lang = Pinto::Type::Language.new(request_lang)
+        lang = Pinto::Language::Code.new(request_lang)
         redirect_uri = Pinto::OpenID.begin(user_supplied_id, lang)
 
         return [

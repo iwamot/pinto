@@ -22,7 +22,7 @@ module Pinto
 
         if param.to_hash.has_key? :lang
           context.extend(Pinto::Helper::Translate)
-          language = Pinto::Type::Language.new(param.to_hash[:lang])
+          language = Pinto::Language::Code.new(param.to_hash[:lang])
           context.set_language(language)
         end
 

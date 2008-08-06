@@ -1,3 +1,4 @@
 config/db.yml
 memo/
+nbproject/
 openid/*

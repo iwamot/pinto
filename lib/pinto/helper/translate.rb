@@ -4,8 +4,8 @@ module Pinto
   module Helper
     module Translate
       def set_language(language)
-        unless language.is_a? Pinto::Type::Language
-          raise ArgumentError.new('language must be Pinto::Type::Language')
+        unless language.is_a? Pinto::Language::Code
+          raise ArgumentError.new('language must be Pinto::Language::Code')
         end
 
         @language = language
@@ -20,7 +20,7 @@ module Pinto
           raise ArgumentError.new('message_id must be String')
         end
 
-        @language = Pinto::Type::Language.new('en') if @language.nil?
+        @language = Pinto::Language::Code.new('en') if @language.nil?
 
         GetText.set_output_charset('UTF-8')
         GetText.bindtextdomain('pinto', {:path => 'locale'})

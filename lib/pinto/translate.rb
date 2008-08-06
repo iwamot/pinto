@@ -3,8 +3,8 @@
 module Pinto
   class Translate
     def initialize(lang)
-      unless lang.is_a? Pinto::Type::Language
-        raise ArgumentError.new('lang must be Pinto::Type::Language')
+      unless lang.is_a? Pinto::Language::Code
+        raise ArgumentError.new('lang must be Pinto::Language::Code')
       end
 
       @translator = Class.new

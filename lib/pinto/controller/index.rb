@@ -15,7 +15,7 @@ module Pinto
           return Pinto::Controller::Private::Multiple.run(request)
         end
 
-        base_lang = Pinto::Type::Language.new(request_lang)
+        base_lang = Pinto::Language::Code.new(request_lang)
         other_languages = Pinto::Language.others(base_lang)
         param = {
           :lang        => request_lang,

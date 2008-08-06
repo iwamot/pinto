@@ -8,11 +8,11 @@ module Pinto
           raise ArgumentError.new('claimed_id must be String')
         end
 
-        @claimed_id = claimed_id
+        @code = claimed_id
       end
 
       def to_s
-        return @claimed_id
+        return @code
       end
     end
   end
