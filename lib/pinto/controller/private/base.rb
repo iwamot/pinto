@@ -1,5 +1,4 @@
 # lib/pinto/controller/private/base.rb
-
 module Pinto
   module Controller
     module Private
@@ -8,7 +7,6 @@ module Pinto
           unless request.is_a? Pinto::Request
             raise ArgumentError.new('request must be Pinto::Request')
           end
-
           if request.get? || request.head?
             method = 'get_action'
           elsif request.post?

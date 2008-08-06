@@ -1,5 +1,4 @@
 # lib/pinto/db/name.rb
-
 module Pinto
   module DB
     class Name
@@ -7,7 +6,6 @@ module Pinto
         unless name.is_a? String
           raise ArgumentError.new('name must be String')
         end
-
         @name = name
       end
 

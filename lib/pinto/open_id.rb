@@ -1,5 +1,4 @@
 # lib/pinto/open_id.rb
-
 module Pinto
   class OpenID
     def self.begin(user_supplied_id, lang)
@@ -11,7 +10,6 @@ module Pinto
       unless lang.is_a? Pinto::Language::Code
         raise ArgumentError.new('lang must be Pinto::Language::Code')
       end
-
       request = self.consumer.begin(user_supplied_id.to_s)
 
       realm     = Pinto::Helper::URI.uri('index',          'lang' => lang.to_s)

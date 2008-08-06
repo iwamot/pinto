@@ -1,5 +1,4 @@
 # lib/pinto/model/signup_reservation.rb
-
 module Pinto
   module Model
     class SignupReservation
@@ -7,7 +6,6 @@ module Pinto
         unless claimed_id.is_a? Pinto::Type::ClaimedID
           raise ArgumentError.new('claimed_id must be Pinto::Type::ClaimedID')
         end
-
         db_config = Pinto::Config::DB.load
 
         begin

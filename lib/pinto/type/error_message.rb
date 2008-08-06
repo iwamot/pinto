@@ -1,5 +1,4 @@
 # lib/pinto/type/error_message.rb
-
 module Pinto
   module Type
     class ErrorMessage
@@ -7,7 +6,6 @@ module Pinto
         unless error_message.is_a? String
           raise ArgumentError.new('error_message must be String')
         end
-
         @error_message = error_message
       end
 

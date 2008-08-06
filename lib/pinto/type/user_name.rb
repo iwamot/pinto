@@ -1,5 +1,4 @@
 # lib/pinto/type/user_name.rb
-
 module Pinto
   module Type
     class UserName
@@ -7,7 +6,6 @@ module Pinto
         unless user_name.is_a? String
           raise ArgumentError.new('user_name must be String')
         end
-
         @user_name = user_name
       end
 

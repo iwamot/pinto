@@ -1,5 +1,4 @@
 # lib/pinto/language/code.rb
-
 module Pinto
   class Language
     class Code
@@ -7,7 +6,6 @@ module Pinto
         unless code.is_a? String
           raise ArgumentError.new('code must be String')
         end
-
         @code = code
       end
 

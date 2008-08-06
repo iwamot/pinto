@@ -1,10 +1,8 @@
 # lib/pinto/controller/signup_account.rb
-
 module Pinto
   module Controller
     class SignupAccount
       include Pinto::Controller::Private::Base
-
       def get_action(request)
         unless request.is_a? Pinto::Request
           raise ArgumentError.new('request must be Pinto::Request')

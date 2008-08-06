@@ -1,5 +1,4 @@
 # lib/pinto/uri/extract_processor.rb
-
 module Pinto
   module URI
     class ExtractProcessor
@@ -7,7 +6,6 @@ module Pinto
         unless name.is_a? String
           raise ArgumentError.new('name must be String')
         end
-
         return 'ja\.|en\.|'      if name == 'lang'
         return '\?.+|'           if name == 'query'
         return '[0-9a-zA-Z_\-]+' if name == 'username'

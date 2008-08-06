@@ -1,5 +1,4 @@
 # lib/pinto/db/password.rb
-
 module Pinto
   module DB
     class Password
@@ -7,7 +6,6 @@ module Pinto
         unless password.is_a? String
           raise ArgumentError.new('password must be String')
         end
-
         @password = password
       end
 

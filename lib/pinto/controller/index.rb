@@ -1,10 +1,8 @@
 # lib/pinto/controller/index.rb
-
 module Pinto
   module Controller
     class Index
       include Pinto::Controller::Private::Base
-
       def get_action(request)
         unless request.is_a? Pinto::Request
           raise ArgumentError.new('request must be Pinto::Request')

@@ -1,5 +1,4 @@
 # lib/pinto/view.rb
-
 module Pinto
   class View
     def self.render(name, param = Pinto::Type::ViewParam.new({}))
@@ -9,7 +8,6 @@ module Pinto
       unless param.is_a? Pinto::Type::ViewParam
         raise ArgumentError.new('param must be Pinto::Type::ViewParam')
       end
-
       template = File.read("view/#{name.to_s}.erb")
       return Pinto::View::XHTML.new(template).evaluate(param)
     end

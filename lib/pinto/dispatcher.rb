@@ -1,12 +1,10 @@
 # lib/pinto/dispatcher.rb
-
 module Pinto
   class Dispatcher
     def call(env)
       unless env.is_a? Hash
         raise ArgumentError.new('env must be Hash')
       end
-
       request = Pinto::Request.new(env)
       uri = Addressable::URI.parse(request.url)
 

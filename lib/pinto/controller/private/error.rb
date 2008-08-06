@@ -1,5 +1,4 @@
 # lib/pinto/controller/private/error.rb
-
 module Pinto
   module Controller
     module Private
@@ -14,7 +13,6 @@ module Pinto
           unless message.is_a? Pinto::Type::ErrorMessage
             raise ArgumentError.new('message must be Pinto::Type::ErrorMessage')
           end
-
           return [
             code.to_i,
             {'Content-Type' => 'text/plain'},

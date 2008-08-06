@@ -1,5 +1,4 @@
 # lib/pinto/controller/private/multiple.rb
-
 module Pinto
   module Controller
     module Private
@@ -8,7 +7,6 @@ module Pinto
           unless request.is_a? Pinto::Request
             raise ArgumentError.new('request must be Pinto::Request')
           end
-
           languages = Pinto::Language.list
           uri_map = request.get_uri_map.to_hash
           uri_map.delete('lang')

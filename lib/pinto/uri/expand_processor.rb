@@ -1,5 +1,4 @@
 # lib/pinto/uri/expand_processor.rb
-
 module Pinto
   module URI
     class ExpandProcessor
@@ -10,7 +9,6 @@ module Pinto
         unless value.is_a? String
           raise ArgumentError.new('value must be String')
         end
-
         return value + '.' if name == 'lang'
         return '?' + value if name == 'query'
         return value

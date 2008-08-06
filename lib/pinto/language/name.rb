@@ -1,5 +1,4 @@
 # lib/pinto/language/name.rb
-
 module Pinto
   class Language
     class Name
@@ -7,7 +6,6 @@ module Pinto
         unless name.is_a? String
           raise ArgumentError.new('name must be String')
         end
-
         @name = name
       end
 

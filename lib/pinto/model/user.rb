@@ -1,5 +1,4 @@
 # lib/pinto/model/user.rb
-
 module Pinto
   module Model
     class User
@@ -11,7 +10,6 @@ module Pinto
           raise ArgumentError.new('claimed_id must be Pinto::Type::ClaimedID')
         end
       end
-
 =begin
       def self.add(user_name, open_id, lang)
         user_name = user_name.to_s

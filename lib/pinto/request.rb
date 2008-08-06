@@ -1,12 +1,10 @@
 # lib/pinto/request.rb
-
 module Pinto
   class Request < Rack::Request
     def initialize(env)
       unless env.is_a? Hash
         raise ArgumentError.new('env must be Hash')
       end
-
       controller_name = Pinto::Type::ControllerName.new('')
       self.set_controller_name(controller_name)
 

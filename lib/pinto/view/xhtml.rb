@@ -1,5 +1,4 @@
 # lib/pinto/view/xhtml.rb
-
 module Pinto
   class View
     class XHTML < Erubis::EscapedEruby
@@ -7,7 +6,6 @@ module Pinto
         unless code.is_a? String
           raise ArgumentError.new('code must be String')
         end
-
         return "h(#{code})"
       end
 

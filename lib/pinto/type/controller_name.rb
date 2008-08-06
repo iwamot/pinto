@@ -1,5 +1,4 @@
 # lib/pinto/type/controller_name.rb
-
 module Pinto
   module Type
     class ControllerName
@@ -7,7 +6,6 @@ module Pinto
         unless controller_name.is_a? String
           raise ArgumentError.new('controller_name must be String')
         end
-
         @controller_name = controller_name
       end
 

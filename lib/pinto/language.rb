@@ -1,9 +1,7 @@
 # lib/pinto/language.rb
-
 module Pinto
   class Language
     DEFAULT_LANGUAGE = 'en'
-
     def self.list(lang = Pinto::Language::Code.new(DEFAULT_LANGUAGE))
       unless lang.is_a? Pinto::Language::Code
         raise ArgumentError.new('lang must be Pinto::Language::Code')

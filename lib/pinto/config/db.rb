@@ -1,11 +1,9 @@
 # lib/pinto/config/db.rb
-
 module Pinto
   class Config
     class DB
       def self.load
         config = YAML.load_file('config/db.yml')
-
         host     = Pinto::DB::Host.new(config['host'])
         name     = Pinto::DB::Name.new(config['name'])
         user     = Pinto::DB::User.new(config['user'])

@@ -1,5 +1,4 @@
 # lib/pinto/type/query_strings.rb
-
 module Pinto
   module Type
     class QueryStrings
@@ -7,7 +6,6 @@ module Pinto
         unless query_strings.is_a? Hash
           raise ArgumentError.new('query_strings must be Hash')
         end
-
         @query_strings = query_strings
       end
 

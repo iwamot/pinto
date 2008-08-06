@@ -1,5 +1,4 @@
 # lib/pinto/type/uri.rb
-
 module Pinto
   module Type
     class URI
@@ -7,7 +6,6 @@ module Pinto
         unless uri.is_a? String
           raise ArgumentError.new('uri must be String')
         end
-
         @uri = uri
       end
 

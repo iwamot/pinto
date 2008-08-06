@@ -1,5 +1,4 @@
 # lib/pinto/db/host.rb
-
 module Pinto
   module DB
     class Host
@@ -7,7 +6,6 @@ module Pinto
         unless host.is_a? String
           raise ArgumentError.new('host must be String')
         end
-
         @host = host
       end
 

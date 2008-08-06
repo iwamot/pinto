@@ -1,5 +1,4 @@
 # lib/pinto/view/translate.rb
-
 module Pinto
   module Helper
     module Translate
@@ -7,7 +6,6 @@ module Pinto
         unless language.is_a? Pinto::Language::Code
           raise ArgumentError.new('language must be Pinto::Language::Code')
         end
-
         @language = language
       end
 

@@ -1,10 +1,8 @@
 # lib/pinto/controller/users.rb
-
 module Pinto
   module Controller
     class Users
       include Pinto::Controller::Private::Base
-
       def post_action(request)
         unless request.is_a? Pinto::Request
           raise ArgumentError.new('request must be Pinto::Request')

@@ -1,12 +1,10 @@
 # lib/pinto/translate.rb
-
 module Pinto
   class Translate
     def initialize(lang)
       unless lang.is_a? Pinto::Language::Code
         raise ArgumentError.new('lang must be Pinto::Language::Code')
       end
-
       @translator = Class.new
       @translator.extend(Pinto::Helper::Translate)
       @translator.set_language(lang)

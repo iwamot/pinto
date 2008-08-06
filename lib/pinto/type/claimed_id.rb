@@ -1,5 +1,4 @@
 # lib/pinto/type/claimed_id.rb
-
 module Pinto
   module Type
     class ClaimedID
@@ -7,7 +6,6 @@ module Pinto
         unless claimed_id.is_a? String
           raise ArgumentError.new('claimed_id must be String')
         end
-
         @code = claimed_id
       end
 

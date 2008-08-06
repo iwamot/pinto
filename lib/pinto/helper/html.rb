@@ -1,5 +1,4 @@
 # lib/pinto/helper/html.rb
-
 module Pinto
   module Helper
     module HTML
@@ -9,7 +8,6 @@ module Pinto
         '>' => '&gt;',
         '"' => '&quot;'
       }
-
       module_function
 
       def escape_for_value(value)

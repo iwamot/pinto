@@ -20,7 +20,7 @@ task :pot do
   file.close
 end
 
-desc "Create mo files"
+desc 'Create mo files'
 task :mo do
   pot_mtime = File.mtime(POT_FILE).strftime('%Y-%m-%d %H:%M+0900')
 
@@ -38,4 +38,28 @@ task :mo do
   end
 
   GetText.create_mofiles(true, 'locale', 'locale', '%s')
+end
+
+require 'rake'
+require 'spec/rake/spectask'
+
+desc 'Run RSpec with RCov'
+Spec::Rake::SpecTask.new('spec') do |t|
+  t.spec_files = FileList['spec/**/*_spec.rb']
+  t.rcov = true
+  t.spec_opts = ['-c', '-fs']
+  t.rcov_opts = ['-x', 'spec']
+end
+
+desc 'Format for Git'
+task :format do
+  Dir.glob('{lib,coverage}/**/*.{rb,html}') do |f|
+    contents = File.read(f)
+    contents = NKF.nkf('-Lu', contents)
+    contents.gsub!(/ +(\n)/, '\1')
+
+    file = File.open(f, 'w').binmode
+    file.write(contents)
+    file.close
+  end
 end

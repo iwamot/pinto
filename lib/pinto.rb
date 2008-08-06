@@ -1,13 +1,10 @@
 # lib/pinto.rb
-
 require 'pathname'
 require 'pinto/pathname'
 require 'pinto/string'
 require 'rubygems'
-
 module Pinto
   VERSION = [0, 0, 1]
-
   def self.version
     return VERSION.join('.')
   end
