@@ -50,49 +50,49 @@ describe 'Pinto::Config::DB.new' do
 end
 
 describe 'Pinto::Config::DB#host' do
-  it 'should return Pinto::DB::Host' do
+  it 'should return given host' do
     host     = Pinto::DB::Host.new('localhost')
     name     = Pinto::DB::Name.new('pinto')
     user     = Pinto::DB::User.new('hogehoge')
     password = Pinto::DB::Password.new('fugafuga')
 
     db_config = Pinto::Config::DB.new(host, name, user, password)
-    db_config.host.should be_an_instance_of(Pinto::DB::Host)
+    db_config.host.should == host
   end
 end
 
 describe 'Pinto::Config::DB#name' do
-  it 'should return Pinto::DB::Name' do
+  it 'should return given name' do
     host     = Pinto::DB::Host.new('localhost')
     name     = Pinto::DB::Name.new('pinto')
     user     = Pinto::DB::User.new('hogehoge')
     password = Pinto::DB::Password.new('fugafuga')
 
     db_config = Pinto::Config::DB.new(host, name, user, password)
-    db_config.name.should be_an_instance_of(Pinto::DB::Name)
+    db_config.name.should == name
   end
 end
 
 describe 'Pinto::Config::DB#user' do
-  it 'should return Pinto::DB::User' do
+  it 'should return given user' do
     host     = Pinto::DB::Host.new('localhost')
     name     = Pinto::DB::Name.new('pinto')
     user     = Pinto::DB::User.new('hogehoge')
     password = Pinto::DB::Password.new('fugafuga')
 
     db_config = Pinto::Config::DB.new(host, name, user, password)
-    db_config.user.should be_an_instance_of(Pinto::DB::User)
+    db_config.user.should == user
   end
 end
 
 describe 'Pinto::Config::DB#password' do
-  it 'should return Pinto::DB::Password' do
+  it 'should return given password' do
     host     = Pinto::DB::Host.new('localhost')
     name     = Pinto::DB::Name.new('pinto')
     user     = Pinto::DB::User.new('hogehoge')
     password = Pinto::DB::Password.new('fugafuga')
 
     db_config = Pinto::Config::DB.new(host, name, user, password)
-    db_config.password.should be_an_instance_of(Pinto::DB::Password)
+    db_config.password.should == password
   end
 end

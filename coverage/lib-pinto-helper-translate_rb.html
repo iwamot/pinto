@@ -556,7 +556,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Thu Aug 07 00:39:19 +0900 2008 with <a href='http://eigenclass.org/hiki/rcov'>rcov 0.8.1.2</a>
+        <p>Generated on Thu Aug 07 23:13:32 +0900 2008 with <a href='http://eigenclass.org/hiki/rcov'>rcov 0.8.1.2</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -619,36 +619,36 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="inferred0"><a name="line1"></a> 1 # lib/pinto/view/translate.rb
-</span><span class="marked1"><a name="line2"></a> 2 module Pinto
-</span><span class="marked0"><a name="line3"></a> 3   module Helper
-</span><span class="marked1"><a name="line4"></a> 4     module Translate
-</span><span class="marked0"><a name="line5"></a> 5       def set_language(language)
-</span><span class="marked1"><a name="line6"></a> 6         unless language.is_a? Pinto::Language::Code
-</span><span class="uncovered0"><a name="line7"></a> 7           raise ArgumentError.new('language must be Pinto::Language::Code')
-</span><span class="uncovered1"><a name="line8"></a> 8         end
-</span><span class="marked0"><a name="line9"></a> 9         @language = language
-</span><span class="inferred1"><a name="line10"></a>10       end
-</span><span class="inferred0"><a name="line11"></a>11
-</span><span class="marked1"><a name="line12"></a>12       def get_language
-</span><span class="uncovered0"><a name="line13"></a>13         return @language
-</span><span class="uncovered1"><a name="line14"></a>14       end
-</span><span class="inferred0"><a name="line15"></a>15
-</span><span class="marked1"><a name="line16"></a>16       def _(message_id)
-</span><span class="marked0"><a name="line17"></a>17         unless message_id.is_a? String
-</span><span class="uncovered1"><a name="line18"></a>18           raise ArgumentError.new('message_id must be String')
-</span><span class="uncovered0"><a name="line19"></a>19         end
-</span><span class="inferred1"><a name="line20"></a>20
-</span><span class="marked0"><a name="line21"></a>21         @language = Pinto::Language::Code.new('en') if @language.nil?
-</span><span class="inferred1"><a name="line22"></a>22
-</span><span class="marked0"><a name="line23"></a>23         GetText.set_output_charset('UTF-8')
-</span><span class="marked1"><a name="line24"></a>24         GetText.bindtextdomain('pinto', {:path =&gt; 'locale'})
-</span><span class="marked0"><a name="line25"></a>25         GetText.set_locale(@language.to_s)
-</span><span class="marked1"><a name="line26"></a>26         return GetText._(message_id.to_s)
-</span><span class="inferred0"><a name="line27"></a>27       end
-</span><span class="inferred1"><a name="line28"></a>28     end
-</span><span class="inferred0"><a name="line29"></a>29   end
-</span><span class="inferred1"><a name="line30"></a>30 end
+    </table><pre><span class="inferred1"><a name="line1"></a> 1 # lib/pinto/view/translate.rb
+</span><span class="marked0"><a name="line2"></a> 2 module Pinto
+</span><span class="marked1"><a name="line3"></a> 3   module Helper
+</span><span class="marked0"><a name="line4"></a> 4     module Translate
+</span><span class="marked1"><a name="line5"></a> 5       def set_language(language)
+</span><span class="marked0"><a name="line6"></a> 6         unless language.is_a? Pinto::Language::Code
+</span><span class="uncovered1"><a name="line7"></a> 7           raise ArgumentError.new('language must be Pinto::Language::Code')
+</span><span class="uncovered0"><a name="line8"></a> 8         end
+</span><span class="marked1"><a name="line9"></a> 9         @language = language
+</span><span class="inferred0"><a name="line10"></a>10       end
+</span><span class="inferred1"><a name="line11"></a>11
+</span><span class="marked0"><a name="line12"></a>12       def get_language
+</span><span class="uncovered1"><a name="line13"></a>13         return @language
+</span><span class="uncovered0"><a name="line14"></a>14       end
+</span><span class="inferred1"><a name="line15"></a>15
+</span><span class="marked0"><a name="line16"></a>16       def _(message_id)
+</span><span class="marked1"><a name="line17"></a>17         unless message_id.is_a? String
+</span><span class="uncovered0"><a name="line18"></a>18           raise ArgumentError.new('message_id must be String')
+</span><span class="uncovered1"><a name="line19"></a>19         end
+</span><span class="inferred0"><a name="line20"></a>20
+</span><span class="marked1"><a name="line21"></a>21         @language = Pinto::Language::Code.new('en') if @language.nil?
+</span><span class="inferred0"><a name="line22"></a>22
+</span><span class="marked1"><a name="line23"></a>23         GetText.set_output_charset('UTF-8')
+</span><span class="marked0"><a name="line24"></a>24         GetText.bindtextdomain('pinto', {:path =&gt; 'locale'})
+</span><span class="marked1"><a name="line25"></a>25         GetText.set_locale(@language.to_s)
+</span><span class="marked0"><a name="line26"></a>26         return GetText._(message_id.to_s)
+</span><span class="inferred1"><a name="line27"></a>27       end
+</span><span class="inferred0"><a name="line28"></a>28     end
+</span><span class="inferred1"><a name="line29"></a>29   end
+</span><span class="inferred0"><a name="line30"></a>30 end
 </span></pre><hr />    <p>Generated using the <a href='http://eigenclass.org/hiki.rb?rcov'>rcov code coverage analysis tool for Ruby</a> version 0.8.1.2.</p><p>
           <a href='http://validator.w3.org/check/referer'>
             <img src='http://www.w3.org/Icons/valid-xhtml10' height='31' alt='Valid XHTML 1.0!' width='88' />

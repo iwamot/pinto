@@ -34,9 +34,9 @@ describe 'Pinto::Language.list' do
     languages = Pinto::Language.list(disp_lang)
     languages.should == [
       Pinto::Language.new(Pinto::Language::Code.new('en'),
-                          Pinto::Language::Name.new('英語')),
+                          Pinto::Language::Name.new('$B1Q8l(B')),
       Pinto::Language.new(Pinto::Language::Code.new('ja'),
-                          Pinto::Language::Name.new('日本語'))
+                          Pinto::Language::Name.new('$BF|K\8l(B'))
     ]
   end
 end
@@ -62,7 +62,7 @@ describe 'Pinto::Language.others' do
     other_languages = Pinto::Language.others(base_lang)
     other_languages.should == [
       Pinto::Language.new(Pinto::Language::Code.new('en'),
-                          Pinto::Language::Name.new('英語'))
+                          Pinto::Language::Name.new('$B1Q8l(B'))
     ]
   end
 end
@@ -84,18 +84,20 @@ describe 'Pinto::Language.new' do
 end
 
 describe 'Pinto::Language#code' do
-  it 'should return Pinto::Language::Code' do
-    language = Pinto::Language.new(Pinto::Language::Code.new('en'),
+  it 'should return given code' do
+    code = Pinto::Language::Code.new('en')
+    language = Pinto::Language.new(code,
                                    Pinto::Language::Name.new('English'))
-    language.code.should be_an_instance_of(Pinto::Language::Code)
+    language.code.should == code
   end
 end
 
 describe 'Pinto::Language#name' do
-  it 'should return Pinto::Language::Name' do
+  it 'should return given name' do
+    name = Pinto::Language::Name.new('English')
     language = Pinto::Language.new(Pinto::Language::Code.new('en'),
-                                   Pinto::Language::Name.new('English'))
-    language.name.should be_an_instance_of(Pinto::Language::Name)
+                                   name)
+    language.name.should == name
   end
 end
 

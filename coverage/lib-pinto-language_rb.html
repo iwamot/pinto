@@ -556,7 +556,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Thu Aug 07 00:39:20 +0900 2008 with <a href='http://eigenclass.org/hiki/rcov'>rcov 0.8.1.2</a>
+        <p>Generated on Thu Aug 07 23:13:32 +0900 2008 with <a href='http://eigenclass.org/hiki/rcov'>rcov 0.8.1.2</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -619,63 +619,63 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="inferred1"><a name="line1"></a> 1 # lib/pinto/language.rb
-</span><span class="marked0"><a name="line2"></a> 2 module Pinto
-</span><span class="marked1"><a name="line3"></a> 3   class Language
-</span><span class="marked0"><a name="line4"></a> 4     DEFAULT_LANGUAGE = 'en'
-</span><span class="marked1"><a name="line5"></a> 5     def self.list(lang = Pinto::Language::Code.new(DEFAULT_LANGUAGE))
-</span><span class="marked0"><a name="line6"></a> 6       unless lang.is_a? Pinto::Language::Code
-</span><span class="marked1"><a name="line7"></a> 7         raise ArgumentError.new('lang must be Pinto::Language::Code')
-</span><span class="inferred0"><a name="line8"></a> 8       end
-</span><span class="inferred1"><a name="line9"></a> 9
-</span><span class="marked0"><a name="line10"></a>10       translator = Pinto::Translate.new(lang)
-</span><span class="inferred1"><a name="line11"></a>11       return [
-</span><span class="marked0"><a name="line12"></a>12         Pinto::Language.new(
-</span><span class="marked1"><a name="line13"></a>13           Pinto::Language::Code.new('en'),
-</span><span class="marked0"><a name="line14"></a>14           Pinto::Language::Name.new(translator._('English'))
-</span><span class="inferred1"><a name="line15"></a>15         ),
-</span><span class="marked0"><a name="line16"></a>16         Pinto::Language.new(
-</span><span class="marked1"><a name="line17"></a>17           Pinto::Language::Code.new('ja'),
-</span><span class="marked0"><a name="line18"></a>18           Pinto::Language::Name.new(translator._('Japanese'))
-</span><span class="inferred1"><a name="line19"></a>19         )
-</span><span class="marked0"><a name="line20"></a>20       ]
-</span><span class="inferred1"><a name="line21"></a>21     end
-</span><span class="inferred0"><a name="line22"></a>22
-</span><span class="marked1"><a name="line23"></a>23     def self.others(base_lang)
-</span><span class="marked0"><a name="line24"></a>24       unless base_lang.is_a? Pinto::Language::Code
-</span><span class="marked1"><a name="line25"></a>25         raise ArgumentError.new('base_lang must be Pinto::Language::Code')
-</span><span class="inferred0"><a name="line26"></a>26       end
-</span><span class="inferred1"><a name="line27"></a>27
-</span><span class="marked0"><a name="line28"></a>28       return self.list(base_lang).delete_if do |lang|
-</span><span class="marked1"><a name="line29"></a>29         lang.code.to_s == base_lang.to_s
-</span><span class="marked0"><a name="line30"></a>30       end
-</span><span class="inferred1"><a name="line31"></a>31     end
-</span><span class="inferred0"><a name="line32"></a>32
-</span><span class="marked1"><a name="line33"></a>33     def initialize(code, name)
-</span><span class="marked0"><a name="line34"></a>34       unless code.is_a? Pinto::Language::Code
-</span><span class="marked1"><a name="line35"></a>35         raise ArgumentError.new('code must be Pinto::Language::Code')
-</span><span class="inferred0"><a name="line36"></a>36       end
-</span><span class="marked1"><a name="line37"></a>37       unless name.is_a? Pinto::Language::Name
-</span><span class="marked0"><a name="line38"></a>38         raise ArgumentError.new('name must be Pinto::Language::Name')
-</span><span class="inferred1"><a name="line39"></a>39       end
-</span><span class="inferred0"><a name="line40"></a>40
-</span><span class="marked1"><a name="line41"></a>41       @code = code
-</span><span class="marked0"><a name="line42"></a>42       @name = name
-</span><span class="inferred1"><a name="line43"></a>43     end
-</span><span class="inferred0"><a name="line44"></a>44
-</span><span class="marked1"><a name="line45"></a>45     def code
-</span><span class="marked0"><a name="line46"></a>46       return @code
-</span><span class="marked1"><a name="line47"></a>47     end
-</span><span class="inferred0"><a name="line48"></a>48
-</span><span class="marked1"><a name="line49"></a>49     def name
-</span><span class="marked0"><a name="line50"></a>50       return @name
-</span><span class="marked1"><a name="line51"></a>51     end
-</span><span class="inferred0"><a name="line52"></a>52
-</span><span class="marked1"><a name="line53"></a>53     def ==(other)
-</span><span class="marked0"><a name="line54"></a>54       return (self.code == other.code &amp;&amp; self.name == other.name)
-</span><span class="marked1"><a name="line55"></a>55     end
-</span><span class="inferred0"><a name="line56"></a>56   end
-</span><span class="inferred1"><a name="line57"></a>57 end
+    </table><pre><span class="inferred0"><a name="line1"></a> 1 # lib/pinto/language.rb
+</span><span class="marked1"><a name="line2"></a> 2 module Pinto
+</span><span class="marked0"><a name="line3"></a> 3   class Language
+</span><span class="marked1"><a name="line4"></a> 4     DEFAULT_LANGUAGE = 'en'
+</span><span class="marked0"><a name="line5"></a> 5     def self.list(lang = Pinto::Language::Code.new(DEFAULT_LANGUAGE))
+</span><span class="marked1"><a name="line6"></a> 6       unless lang.is_a? Pinto::Language::Code
+</span><span class="marked0"><a name="line7"></a> 7         raise ArgumentError.new('lang must be Pinto::Language::Code')
+</span><span class="inferred1"><a name="line8"></a> 8       end
+</span><span class="inferred0"><a name="line9"></a> 9
+</span><span class="marked1"><a name="line10"></a>10       translator = Pinto::Translate.new(lang)
+</span><span class="inferred0"><a name="line11"></a>11       return [
+</span><span class="marked1"><a name="line12"></a>12         Pinto::Language.new(
+</span><span class="marked0"><a name="line13"></a>13           Pinto::Language::Code.new('en'),
+</span><span class="marked1"><a name="line14"></a>14           Pinto::Language::Name.new(translator._('English'))
+</span><span class="inferred0"><a name="line15"></a>15         ),
+</span><span class="marked1"><a name="line16"></a>16         Pinto::Language.new(
+</span><span class="marked0"><a name="line17"></a>17           Pinto::Language::Code.new('ja'),
+</span><span class="marked1"><a name="line18"></a>18           Pinto::Language::Name.new(translator._('Japanese'))
+</span><span class="inferred0"><a name="line19"></a>19         )
+</span><span class="marked1"><a name="line20"></a>20       ]
+</span><span class="inferred0"><a name="line21"></a>21     end
+</span><span class="inferred1"><a name="line22"></a>22
+</span><span class="marked0"><a name="line23"></a>23     def self.others(base_lang)
+</span><span class="marked1"><a name="line24"></a>24       unless base_lang.is_a? Pinto::Language::Code
+</span><span class="marked0"><a name="line25"></a>25         raise ArgumentError.new('base_lang must be Pinto::Language::Code')
+</span><span class="inferred1"><a name="line26"></a>26       end
+</span><span class="inferred0"><a name="line27"></a>27
+</span><span class="marked1"><a name="line28"></a>28       return self.list(base_lang).delete_if do |lang|
+</span><span class="marked0"><a name="line29"></a>29         lang.code.to_s == base_lang.to_s
+</span><span class="marked1"><a name="line30"></a>30       end
+</span><span class="inferred0"><a name="line31"></a>31     end
+</span><span class="inferred1"><a name="line32"></a>32
+</span><span class="marked0"><a name="line33"></a>33     def initialize(code, name)
+</span><span class="marked1"><a name="line34"></a>34       unless code.is_a? Pinto::Language::Code
+</span><span class="marked0"><a name="line35"></a>35         raise ArgumentError.new('code must be Pinto::Language::Code')
+</span><span class="inferred1"><a name="line36"></a>36       end
+</span><span class="marked0"><a name="line37"></a>37       unless name.is_a? Pinto::Language::Name
+</span><span class="marked1"><a name="line38"></a>38         raise ArgumentError.new('name must be Pinto::Language::Name')
+</span><span class="inferred0"><a name="line39"></a>39       end
+</span><span class="inferred1"><a name="line40"></a>40
+</span><span class="marked0"><a name="line41"></a>41       @code = code
+</span><span class="marked1"><a name="line42"></a>42       @name = name
+</span><span class="inferred0"><a name="line43"></a>43     end
+</span><span class="inferred1"><a name="line44"></a>44
+</span><span class="marked0"><a name="line45"></a>45     def code
+</span><span class="marked1"><a name="line46"></a>46       return @code
+</span><span class="marked0"><a name="line47"></a>47     end
+</span><span class="inferred1"><a name="line48"></a>48
+</span><span class="marked0"><a name="line49"></a>49     def name
+</span><span class="marked1"><a name="line50"></a>50       return @name
+</span><span class="marked0"><a name="line51"></a>51     end
+</span><span class="inferred1"><a name="line52"></a>52
+</span><span class="marked0"><a name="line53"></a>53     def ==(other)
+</span><span class="marked1"><a name="line54"></a>54       return (self.code == other.code &amp;&amp; self.name == other.name)
+</span><span class="marked0"><a name="line55"></a>55     end
+</span><span class="inferred1"><a name="line56"></a>56   end
+</span><span class="inferred0"><a name="line57"></a>57 end
 </span></pre><hr />    <p>Generated using the <a href='http://eigenclass.org/hiki.rb?rcov'>rcov code coverage analysis tool for Ruby</a> version 0.8.1.2.</p><p>
           <a href='http://validator.w3.org/check/referer'>
             <img src='http://www.w3.org/Icons/valid-xhtml10' height='31' alt='Valid XHTML 1.0!' width='88' />

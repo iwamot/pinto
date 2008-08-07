@@ -556,7 +556,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Thu Aug 07 00:39:19 +0900 2008 with <a href='http://eigenclass.org/hiki/rcov'>rcov 0.8.1.2</a>
+        <p>Generated on Thu Aug 07 23:13:32 +0900 2008 with <a href='http://eigenclass.org/hiki/rcov'>rcov 0.8.1.2</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -619,30 +619,30 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="inferred0"><a name="line1"></a> 1 # lib/pinto/encoding/utf8.rb
-</span><span class="marked1"><a name="line2"></a> 2 module Pinto
-</span><span class="marked0"><a name="line3"></a> 3   module Encoding
-</span><span class="marked1"><a name="line4"></a> 4     class UTF8
-</span><span class="marked0"><a name="line5"></a> 5       def self.valid?(value)
-</span><span class="marked1"><a name="line6"></a> 6         unless value.is_a? String
-</span><span class="uncovered0"><a name="line7"></a> 7           raise ArgumentError.new('value must be String')
-</span><span class="uncovered1"><a name="line8"></a> 8         end
-</span><span class="marked0"><a name="line9"></a> 9         valid_utf8 = /^(?:
-</span><span class="inferred1"><a name="line10"></a>10            [\x00-\x7F]                    # U+0000   - U+007F
-</span><span class="uncovered0"><a name="line11"></a>11           |[\xC2-\xDF][\x80-\xBF]         # U+0080   - U+07FF
-</span><span class="uncovered1"><a name="line12"></a>12           |\xE0[\xA0-\xBF][\x80-\xBF]     # U+0800   - U+0FFF
-</span><span class="uncovered0"><a name="line13"></a>13           |[\xE1-\xEC][\x80-\xBF]{2}      # U+1000   - U+CFFF
-</span><span class="uncovered1"><a name="line14"></a>14           |\xED[\x80-\x9F][\x80-\xBF]     # U+D000   - U+D7FF
-</span><span class="uncovered0"><a name="line15"></a>15           |\xEF[\x80-\xBF][\x80-\xBD]     # U+E000   - U+FFFD
-</span><span class="uncovered1"><a name="line16"></a>16           |\xF0[\x90-\xBF][\x80-\xBF]{2}  # U+10000  - U+3FFFF
-</span><span class="uncovered0"><a name="line17"></a>17           |[\xF1-\xF3][\x80-\xBF]{3}      # U+40000  - U+FFFFF
-</span><span class="uncovered1"><a name="line18"></a>18           |\xF4[\x80-\x8F][\x80-\xBF]{2}  # U+100000 - U+10FFFF
-</span><span class="uncovered0"><a name="line19"></a>19         )*$/x
-</span><span class="marked1"><a name="line20"></a>20         return !value.match(valid_utf8).nil?
-</span><span class="inferred0"><a name="line21"></a>21       end
-</span><span class="inferred1"><a name="line22"></a>22     end
-</span><span class="inferred0"><a name="line23"></a>23   end
-</span><span class="inferred1"><a name="line24"></a>24 end
+    </table><pre><span class="inferred1"><a name="line1"></a> 1 # lib/pinto/encoding/utf8.rb
+</span><span class="marked0"><a name="line2"></a> 2 module Pinto
+</span><span class="marked1"><a name="line3"></a> 3   module Encoding
+</span><span class="marked0"><a name="line4"></a> 4     class UTF8
+</span><span class="marked1"><a name="line5"></a> 5       def self.valid?(value)
+</span><span class="marked0"><a name="line6"></a> 6         unless value.is_a? String
+</span><span class="uncovered1"><a name="line7"></a> 7           raise ArgumentError.new('value must be String')
+</span><span class="uncovered0"><a name="line8"></a> 8         end
+</span><span class="marked1"><a name="line9"></a> 9         valid_utf8 = /^(?:
+</span><span class="inferred0"><a name="line10"></a>10            [\x00-\x7F]                    # U+0000   - U+007F
+</span><span class="uncovered1"><a name="line11"></a>11           |[\xC2-\xDF][\x80-\xBF]         # U+0080   - U+07FF
+</span><span class="uncovered0"><a name="line12"></a>12           |\xE0[\xA0-\xBF][\x80-\xBF]     # U+0800   - U+0FFF
+</span><span class="uncovered1"><a name="line13"></a>13           |[\xE1-\xEC][\x80-\xBF]{2}      # U+1000   - U+CFFF
+</span><span class="uncovered0"><a name="line14"></a>14           |\xED[\x80-\x9F][\x80-\xBF]     # U+D000   - U+D7FF
+</span><span class="uncovered1"><a name="line15"></a>15           |\xEF[\x80-\xBF][\x80-\xBD]     # U+E000   - U+FFFD
+</span><span class="uncovered0"><a name="line16"></a>16           |\xF0[\x90-\xBF][\x80-\xBF]{2}  # U+10000  - U+3FFFF
+</span><span class="uncovered1"><a name="line17"></a>17           |[\xF1-\xF3][\x80-\xBF]{3}      # U+40000  - U+FFFFF
+</span><span class="uncovered0"><a name="line18"></a>18           |\xF4[\x80-\x8F][\x80-\xBF]{2}  # U+100000 - U+10FFFF
+</span><span class="uncovered1"><a name="line19"></a>19         )*$/x
+</span><span class="marked0"><a name="line20"></a>20         return !value.match(valid_utf8).nil?
+</span><span class="inferred1"><a name="line21"></a>21       end
+</span><span class="inferred0"><a name="line22"></a>22     end
+</span><span class="inferred1"><a name="line23"></a>23   end
+</span><span class="inferred0"><a name="line24"></a>24 end
 </span></pre><hr />    <p>Generated using the <a href='http://eigenclass.org/hiki.rb?rcov'>rcov code coverage analysis tool for Ruby</a> version 0.8.1.2.</p><p>
           <a href='http://validator.w3.org/check/referer'>
             <img src='http://www.w3.org/Icons/valid-xhtml10' height='31' alt='Valid XHTML 1.0!' width='88' />

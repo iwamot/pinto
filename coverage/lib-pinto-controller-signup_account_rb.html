@@ -1,7 +1,7 @@
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
       <head>
-        <title>lib/pinto/request.rb - C0 code coverage information</title>
+        <title>lib/pinto/controller/signup_account.rb - C0 code coverage information</title>
         <style type='text/css'>body { background-color: rgb(240, 240, 245); }</style>
         <style type='text/css'>span.cross-ref-title {
  font-size: 140%;
@@ -556,7 +556,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Thu Aug 07 23:13:33 +0900 2008 with <a href='http://eigenclass.org/hiki/rcov'>rcov 0.8.1.2</a>
+        <p>Generated on Thu Aug 07 23:13:31 +0900 2008 with <a href='http://eigenclass.org/hiki/rcov'>rcov 0.8.1.2</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -577,24 +577,24 @@ span.run100 {
       <tbody>
         <tr class='light'>
           <td>
-            <a href='lib-pinto-request_rb.html'>lib/pinto/request.rb</a>
+            <a href='lib-pinto-controller-signup_account_rb.html'>lib/pinto/controller/signup_account.rb</a>
           </td>
           <td class='lines_total'>
-            <tt>51</tt>
+            <tt>63</tt>
           </td>
           <td class='lines_code'>
-            <tt>40</tt>
+            <tt>56</tt>
           </td>
           <td>
             <table cellspacing='0' cellpadding='0' align='right'>
               <tr>
                 <td>
-                  <tt class='coverage_total'>72.5%</tt>&nbsp;</td>
+                  <tt class='coverage_total'>14.3%</tt>&nbsp;</td>
                 <td>
                   <table cellspacing='0' class='percent_graph' cellpadding='0' width='100'>
                     <tr>
-                      <td class='covered' width='73' />
-                      <td class='uncovered' width='27' />
+                      <td class='covered' width='14' />
+                      <td class='uncovered' width='86' />
                     </tr>
                   </table>
                 </td>
@@ -605,12 +605,12 @@ span.run100 {
             <table cellspacing='0' cellpadding='0' align='right'>
               <tr>
                 <td>
-                  <tt class='coverage_code'>65.0%</tt>&nbsp;</td>
+                  <tt class='coverage_code'>14.3%</tt>&nbsp;</td>
                 <td>
                   <table cellspacing='0' class='percent_graph' cellpadding='0' width='100'>
                     <tr>
-                      <td class='covered' width='65' />
-                      <td class='uncovered' width='35' />
+                      <td class='covered' width='14' />
+                      <td class='uncovered' width='86' />
                     </tr>
                   </table>
                 </td>
@@ -619,57 +619,69 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="inferred1"><a name="line1"></a> 1 # lib/pinto/request.rb
-</span><span class="marked0"><a name="line2"></a> 2 module Pinto
-</span><span class="marked1"><a name="line3"></a> 3   class Request &lt; Rack::Request
-</span><span class="marked0"><a name="line4"></a> 4     def initialize(env)
-</span><span class="marked1"><a name="line5"></a> 5       unless env.is_a? Hash
-</span><span class="uncovered0"><a name="line6"></a> 6         raise ArgumentError.new('env must be Hash')
-</span><span class="uncovered1"><a name="line7"></a> 7       end
-</span><span class="marked0"><a name="line8"></a> 8       controller_name = Pinto::Type::ControllerName.new('')
-</span><span class="marked1"><a name="line9"></a> 9       self.set_controller_name(controller_name)
-</span><span class="inferred0"><a name="line10"></a>10
-</span><span class="marked1"><a name="line11"></a>11       uri_map = Pinto::Type::UriMap.new({})
-</span><span class="marked0"><a name="line12"></a>12       self.set_uri_map(uri_map)
-</span><span class="inferred1"><a name="line13"></a>13
-</span><span class="marked0"><a name="line14"></a>14       super(env)
-</span><span class="inferred1"><a name="line15"></a>15     end
-</span><span class="inferred0"><a name="line16"></a>16
-</span><span class="marked1"><a name="line17"></a>17     def set_controller_name(controller_name)
-</span><span class="marked0"><a name="line18"></a>18       unless controller_name.is_a? Pinto::Type::ControllerName
-</span><span class="uncovered1"><a name="line19"></a>19         raise ArgumentError.new(
-</span><span class="uncovered0"><a name="line20"></a>20           'controller_name must be Pinto::Type::ControllerName'
-</span><span class="uncovered1"><a name="line21"></a>21         )
-</span><span class="uncovered0"><a name="line22"></a>22       end
-</span><span class="inferred1"><a name="line23"></a>23
-</span><span class="marked0"><a name="line24"></a>24       @controller_name = controller_name
-</span><span class="inferred1"><a name="line25"></a>25     end
-</span><span class="inferred0"><a name="line26"></a>26
-</span><span class="marked1"><a name="line27"></a>27     def get_controller_name
-</span><span class="marked0"><a name="line28"></a>28       return @controller_name
-</span><span class="marked1"><a name="line29"></a>29     end
-</span><span class="inferred0"><a name="line30"></a>30
-</span><span class="marked1"><a name="line31"></a>31     def set_uri_map(uri_map)
-</span><span class="marked0"><a name="line32"></a>32       unless uri_map.is_a? Pinto::Type::UriMap
-</span><span class="uncovered1"><a name="line33"></a>33         raise ArgumentError.new('uri_map must be Pinto::Type::UriMap')
-</span><span class="uncovered0"><a name="line34"></a>34       end
-</span><span class="inferred1"><a name="line35"></a>35
-</span><span class="marked0"><a name="line36"></a>36       @uri_map = uri_map
-</span><span class="inferred1"><a name="line37"></a>37     end
-</span><span class="inferred0"><a name="line38"></a>38
-</span><span class="marked1"><a name="line39"></a>39     def get_uri_map
-</span><span class="marked0"><a name="line40"></a>40       return @uri_map
-</span><span class="marked1"><a name="line41"></a>41     end
-</span><span class="inferred0"><a name="line42"></a>42
-</span><span class="marked1"><a name="line43"></a>43     def head?
-</span><span class="uncovered0"><a name="line44"></a>44       return (request_method == 'HEAD')
-</span><span class="uncovered1"><a name="line45"></a>45     end
-</span><span class="inferred0"><a name="line46"></a>46
-</span><span class="marked1"><a name="line47"></a>47     def options?
-</span><span class="uncovered0"><a name="line48"></a>48       return (request_method == 'OPTIONS')
-</span><span class="uncovered1"><a name="line49"></a>49     end
-</span><span class="uncovered0"><a name="line50"></a>50   end
-</span><span class="uncovered1"><a name="line51"></a>51 end
+    </table><pre><span class="inferred0"><a name="line1"></a> 1 # lib/pinto/controller/signup_account.rb
+</span><span class="marked1"><a name="line2"></a> 2 module Pinto
+</span><span class="marked0"><a name="line3"></a> 3   module Controller
+</span><span class="marked1"><a name="line4"></a> 4     class SignupAccount
+</span><span class="marked0"><a name="line5"></a> 5       include Pinto::Controller::Private::Base
+</span><span class="marked1"><a name="line6"></a> 6       def get_action(request)
+</span><span class="marked0"><a name="line7"></a> 7         unless request.is_a? Pinto::Request
+</span><span class="marked1"><a name="line8"></a> 8           raise ArgumentError.new('request must be Pinto::Request')
+</span><span class="inferred0"><a name="line9"></a> 9         end
+</span><span class="uncovered1"><a name="line10"></a>10
+</span><span class="uncovered0"><a name="line11"></a>11         request_lang = request.get_uri_map.to_hash['lang']
+</span><span class="uncovered1"><a name="line12"></a>12         if request_lang.empty?
+</span><span class="uncovered0"><a name="line13"></a>13           http_status_code = Pinto::Type::HttpStatusCode.new(400)
+</span><span class="uncovered1"><a name="line14"></a>14           translator = Pinto::Translate.new(
+</span><span class="uncovered0"><a name="line15"></a>15             Pinto::Language::Code.new(request_lang)
+</span><span class="uncovered1"><a name="line16"></a>16           )
+</span><span class="uncovered0"><a name="line17"></a>17           message = translator._('URI contains no valid language')
+</span><span class="uncovered1"><a name="line18"></a>18           message = Pinto::Type::ErrorMessage.new(message)
+</span><span class="uncovered0"><a name="line19"></a>19           return Pinto::Controller::Private::Error.run(
+</span><span class="uncovered1"><a name="line20"></a>20             request, http_status_code, message
+</span><span class="uncovered0"><a name="line21"></a>21           )
+</span><span class="uncovered1"><a name="line22"></a>22         end
+</span><span class="uncovered0"><a name="line23"></a>23
+</span><span class="uncovered1"><a name="line24"></a>24         query_strings = Pinto::Type::QueryStrings.new(request.GET)
+</span><span class="uncovered0"><a name="line25"></a>25         current_uri   = Pinto::Type::URI.new(request.url)
+</span><span class="uncovered1"><a name="line26"></a>26         claimed_id = Pinto::OpenID.complete(query_strings, current_uri)
+</span><span class="uncovered0"><a name="line27"></a>27         if claimed_id.nil?
+</span><span class="uncovered1"><a name="line28"></a>28           http_status_code = Pinto::Type::HttpStatusCode.new(400)
+</span><span class="uncovered0"><a name="line29"></a>29           translator = Pinto::Translate.new(
+</span><span class="uncovered1"><a name="line30"></a>30             Pinto::Language::Code.new(request_lang)
+</span><span class="uncovered0"><a name="line31"></a>31           )
+</span><span class="uncovered1"><a name="line32"></a>32           message = translator._('OpenID authentication failed')
+</span><span class="uncovered0"><a name="line33"></a>33           message = Pinto::Type::ErrorMessage.new(message)
+</span><span class="uncovered1"><a name="line34"></a>34           return Pinto::Controller::Private::Error.run(
+</span><span class="uncovered0"><a name="line35"></a>35             request, http_status_code, message
+</span><span class="uncovered1"><a name="line36"></a>36           )
+</span><span class="uncovered0"><a name="line37"></a>37         end
+</span><span class="uncovered1"><a name="line38"></a>38
+</span><span class="uncovered0"><a name="line39"></a>39         Pinto::Model::SignupReservation.add(
+</span><span class="uncovered1"><a name="line40"></a>40           Pinto::Type::ClaimedID.new(claimed_id)
+</span><span class="uncovered0"><a name="line41"></a>41         )
+</span><span class="uncovered1"><a name="line42"></a>42
+</span><span class="uncovered0"><a name="line43"></a>43         base_lang = Pinto::Language::Code.new(request_lang)
+</span><span class="uncovered1"><a name="line44"></a>44         other_languages = Pinto::Language.others(base_lang)
+</span><span class="uncovered0"><a name="line45"></a>45         param = {
+</span><span class="uncovered1"><a name="line46"></a>46           :lang       =&gt; request_lang,
+</span><span class="uncovered0"><a name="line47"></a>47           :claimed_id =&gt; claimed_id,
+</span><span class="uncovered1"><a name="line48"></a>48           :user_name  =&gt; ''
+</span><span class="uncovered0"><a name="line49"></a>49         }
+</span><span class="uncovered1"><a name="line50"></a>50
+</span><span class="uncovered0"><a name="line51"></a>51         view_name  = Pinto::Type::ViewName.new('signup_account')
+</span><span class="uncovered1"><a name="line52"></a>52         view_param = Pinto::Type::ViewParam.new(param)
+</span><span class="uncovered0"><a name="line53"></a>53         response_body = Pinto::View.render(view_name, view_param)
+</span><span class="uncovered1"><a name="line54"></a>54
+</span><span class="uncovered0"><a name="line55"></a>55         return [
+</span><span class="uncovered1"><a name="line56"></a>56           200,
+</span><span class="uncovered0"><a name="line57"></a>57           {'Content-Type' =&gt; 'application/xhtml+xml; charset=UTF-8'},
+</span><span class="uncovered1"><a name="line58"></a>58           [response_body]
+</span><span class="uncovered0"><a name="line59"></a>59         ]
+</span><span class="uncovered1"><a name="line60"></a>60       end
+</span><span class="uncovered0"><a name="line61"></a>61     end
+</span><span class="uncovered1"><a name="line62"></a>62   end
+</span><span class="uncovered0"><a name="line63"></a>63 end
 </span></pre><hr />    <p>Generated using the <a href='http://eigenclass.org/hiki.rb?rcov'>rcov code coverage analysis tool for Ruby</a> version 0.8.1.2.</p><p>
           <a href='http://validator.w3.org/check/referer'>
             <img src='http://www.w3.org/Icons/valid-xhtml10' height='31' alt='Valid XHTML 1.0!' width='88' />

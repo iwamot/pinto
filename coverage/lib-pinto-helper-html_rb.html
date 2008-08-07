@@ -556,7 +556,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Thu Aug 07 00:39:19 +0900 2008 with <a href='http://eigenclass.org/hiki/rcov'>rcov 0.8.1.2</a>
+        <p>Generated on Thu Aug 07 23:13:32 +0900 2008 with <a href='http://eigenclass.org/hiki/rcov'>rcov 0.8.1.2</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -619,74 +619,74 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="inferred0"><a name="line1"></a> 1 # lib/pinto/helper/html.rb
-</span><span class="marked1"><a name="line2"></a> 2 module Pinto
-</span><span class="marked0"><a name="line3"></a> 3   module Helper
-</span><span class="marked1"><a name="line4"></a> 4     module HTML
-</span><span class="marked0"><a name="line5"></a> 5       ESCAPE_TABLE = {
-</span><span class="inferred1"><a name="line6"></a> 6         '&amp;' =&gt; '&amp;amp;',
-</span><span class="inferred0"><a name="line7"></a> 7         '&lt;' =&gt; '&amp;lt;',
-</span><span class="inferred1"><a name="line8"></a> 8         '&gt;' =&gt; '&amp;gt;',
-</span><span class="inferred0"><a name="line9"></a> 9         '&quot;' =&gt; '&amp;quot;'
-</span><span class="inferred1"><a name="line10"></a>10       }
-</span><span class="marked0"><a name="line11"></a>11       module_function
-</span><span class="inferred1"><a name="line12"></a>12
-</span><span class="marked0"><a name="line13"></a>13       def escape_for_value(value)
-</span><span class="marked1"><a name="line14"></a>14         unless value.is_a? String
-</span><span class="uncovered0"><a name="line15"></a>15           raise ArgumentError.new('value must be String')
-</span><span class="uncovered1"><a name="line16"></a>16         end
-</span><span class="inferred0"><a name="line17"></a>17
-</span><span class="marked1"><a name="line18"></a>18         escape_chars = Pinto::Type::EscapeChars.new(['&amp;', '&lt;', '&gt;'])
-</span><span class="marked0"><a name="line19"></a>19         return eliminate(value, escape_chars)
-</span><span class="inferred1"><a name="line20"></a>20       end
-</span><span class="inferred0"><a name="line21"></a>21
-</span><span class="marked1"><a name="line22"></a>22       def escape_for_quote(value)
-</span><span class="marked0"><a name="line23"></a>23         unless value.is_a? String
-</span><span class="uncovered1"><a name="line24"></a>24           raise ArgumentError.new('value must be String')
-</span><span class="uncovered0"><a name="line25"></a>25         end
-</span><span class="inferred1"><a name="line26"></a>26
-</span><span class="marked0"><a name="line27"></a>27         escape_chars = Pinto::Type::EscapeChars.new(['&amp;', '&lt;', '&gt;', '&quot;'])
-</span><span class="marked1"><a name="line28"></a>28         return eliminate(value, escape_chars)
-</span><span class="inferred0"><a name="line29"></a>29       end
-</span><span class="inferred1"><a name="line30"></a>30
-</span><span class="marked0"><a name="line31"></a>31       def escape_for_tag(value)
-</span><span class="uncovered1"><a name="line32"></a>32         unless value.is_a? String
-</span><span class="uncovered0"><a name="line33"></a>33           raise ArgumentError.new('value must be String')
-</span><span class="uncovered1"><a name="line34"></a>34         end
-</span><span class="uncovered0"><a name="line35"></a>35
-</span><span class="uncovered1"><a name="line36"></a>36         return eliminate(value)
-</span><span class="uncovered0"><a name="line37"></a>37       end
-</span><span class="inferred1"><a name="line38"></a>38
-</span><span class="marked0"><a name="line39"></a>39       alias h        escape_for_value
-</span><span class="marked1"><a name="line40"></a>40       alias in_quote escape_for_quote
-</span><span class="marked0"><a name="line41"></a>41       alias has_tag  escape_for_tag
-</span><span class="inferred1"><a name="line42"></a>42
-</span><span class="marked0"><a name="line43"></a>43       def eliminate(value, escape_chars = Pinto::Type::EscapeChars.new([]))
-</span><span class="marked1"><a name="line44"></a>44         unless value.is_a? String
-</span><span class="uncovered0"><a name="line45"></a>45           raise ArgumentError.new('value must be String')
-</span><span class="uncovered1"><a name="line46"></a>46         end
-</span><span class="marked0"><a name="line47"></a>47         unless escape_chars.is_a? Pinto::Type::EscapeChars
-</span><span class="uncovered1"><a name="line48"></a>48           raise ArgumentError.new(
-</span><span class="uncovered0"><a name="line49"></a>49             'escape_chars must be Pinto::Type::EscapeChars'
-</span><span class="uncovered1"><a name="line50"></a>50           )
-</span><span class="uncovered0"><a name="line51"></a>51         end
-</span><span class="inferred1"><a name="line52"></a>52
-</span><span class="marked0"><a name="line53"></a>53         unless Pinto::Encoding::UTF8.valid? value
-</span><span class="uncovered1"><a name="line54"></a>54           raise ArgumentError.new('value is not UTF8 string')
-</span><span class="uncovered0"><a name="line55"></a>55         end
-</span><span class="inferred1"><a name="line56"></a>56
-</span><span class="marked0"><a name="line57"></a>57         control_codes = /
-</span><span class="inferred1"><a name="line58"></a>58            [\x00-\x08]|\x0B|\x0C|[\x0E-\x1F]  # C0 control codes
-</span><span class="uncovered0"><a name="line59"></a>59           |\x7F                               # DEL
-</span><span class="uncovered1"><a name="line60"></a>60           |\xC2[\x80-\x9F]                    # C1 control codes
-</span><span class="uncovered0"><a name="line61"></a>61         /ux
-</span><span class="marked1"><a name="line62"></a>62         value.gsub!(control_codes, '')
-</span><span class="inferred0"><a name="line63"></a>63
-</span><span class="marked1"><a name="line64"></a>64         return value.gsub(/[#{escape_chars.to_a.join}]/) {|s| ESCAPE_TABLE[s]}
-</span><span class="inferred0"><a name="line65"></a>65       end
-</span><span class="inferred1"><a name="line66"></a>66     end
-</span><span class="inferred0"><a name="line67"></a>67   end
-</span><span class="inferred1"><a name="line68"></a>68 end
+    </table><pre><span class="inferred1"><a name="line1"></a> 1 # lib/pinto/helper/html.rb
+</span><span class="marked0"><a name="line2"></a> 2 module Pinto
+</span><span class="marked1"><a name="line3"></a> 3   module Helper
+</span><span class="marked0"><a name="line4"></a> 4     module HTML
+</span><span class="marked1"><a name="line5"></a> 5       ESCAPE_TABLE = {
+</span><span class="inferred0"><a name="line6"></a> 6         '&amp;' =&gt; '&amp;amp;',
+</span><span class="inferred1"><a name="line7"></a> 7         '&lt;' =&gt; '&amp;lt;',
+</span><span class="inferred0"><a name="line8"></a> 8         '&gt;' =&gt; '&amp;gt;',
+</span><span class="inferred1"><a name="line9"></a> 9         '&quot;' =&gt; '&amp;quot;'
+</span><span class="inferred0"><a name="line10"></a>10       }
+</span><span class="marked1"><a name="line11"></a>11       module_function
+</span><span class="inferred0"><a name="line12"></a>12
+</span><span class="marked1"><a name="line13"></a>13       def escape_for_value(value)
+</span><span class="marked0"><a name="line14"></a>14         unless value.is_a? String
+</span><span class="uncovered1"><a name="line15"></a>15           raise ArgumentError.new('value must be String')
+</span><span class="uncovered0"><a name="line16"></a>16         end
+</span><span class="inferred1"><a name="line17"></a>17
+</span><span class="marked0"><a name="line18"></a>18         escape_chars = Pinto::Type::EscapeChars.new(['&amp;', '&lt;', '&gt;'])
+</span><span class="marked1"><a name="line19"></a>19         return eliminate(value, escape_chars)
+</span><span class="inferred0"><a name="line20"></a>20       end
+</span><span class="inferred1"><a name="line21"></a>21
+</span><span class="marked0"><a name="line22"></a>22       def escape_for_quote(value)
+</span><span class="marked1"><a name="line23"></a>23         unless value.is_a? String
+</span><span class="uncovered0"><a name="line24"></a>24           raise ArgumentError.new('value must be String')
+</span><span class="uncovered1"><a name="line25"></a>25         end
+</span><span class="inferred0"><a name="line26"></a>26
+</span><span class="marked1"><a name="line27"></a>27         escape_chars = Pinto::Type::EscapeChars.new(['&amp;', '&lt;', '&gt;', '&quot;'])
+</span><span class="marked0"><a name="line28"></a>28         return eliminate(value, escape_chars)
+</span><span class="inferred1"><a name="line29"></a>29       end
+</span><span class="inferred0"><a name="line30"></a>30
+</span><span class="marked1"><a name="line31"></a>31       def escape_for_tag(value)
+</span><span class="uncovered0"><a name="line32"></a>32         unless value.is_a? String
+</span><span class="uncovered1"><a name="line33"></a>33           raise ArgumentError.new('value must be String')
+</span><span class="uncovered0"><a name="line34"></a>34         end
+</span><span class="uncovered1"><a name="line35"></a>35
+</span><span class="uncovered0"><a name="line36"></a>36         return eliminate(value)
+</span><span class="uncovered1"><a name="line37"></a>37       end
+</span><span class="inferred0"><a name="line38"></a>38
+</span><span class="marked1"><a name="line39"></a>39       alias h        escape_for_value
+</span><span class="marked0"><a name="line40"></a>40       alias in_quote escape_for_quote
+</span><span class="marked1"><a name="line41"></a>41       alias has_tag  escape_for_tag
+</span><span class="inferred0"><a name="line42"></a>42
+</span><span class="marked1"><a name="line43"></a>43       def eliminate(value, escape_chars = Pinto::Type::EscapeChars.new([]))
+</span><span class="marked0"><a name="line44"></a>44         unless value.is_a? String
+</span><span class="uncovered1"><a name="line45"></a>45           raise ArgumentError.new('value must be String')
+</span><span class="uncovered0"><a name="line46"></a>46         end
+</span><span class="marked1"><a name="line47"></a>47         unless escape_chars.is_a? Pinto::Type::EscapeChars
+</span><span class="uncovered0"><a name="line48"></a>48           raise ArgumentError.new(
+</span><span class="uncovered1"><a name="line49"></a>49             'escape_chars must be Pinto::Type::EscapeChars'
+</span><span class="uncovered0"><a name="line50"></a>50           )
+</span><span class="uncovered1"><a name="line51"></a>51         end
+</span><span class="inferred0"><a name="line52"></a>52
+</span><span class="marked1"><a name="line53"></a>53         unless Pinto::Encoding::UTF8.valid? value
+</span><span class="uncovered0"><a name="line54"></a>54           raise ArgumentError.new('value is not UTF8 string')
+</span><span class="uncovered1"><a name="line55"></a>55         end
+</span><span class="inferred0"><a name="line56"></a>56
+</span><span class="marked1"><a name="line57"></a>57         control_codes = /
+</span><span class="inferred0"><a name="line58"></a>58            [\x00-\x08]|\x0B|\x0C|[\x0E-\x1F]  # C0 control codes
+</span><span class="uncovered1"><a name="line59"></a>59           |\x7F                               # DEL
+</span><span class="uncovered0"><a name="line60"></a>60           |\xC2[\x80-\x9F]                    # C1 control codes
+</span><span class="uncovered1"><a name="line61"></a>61         /ux
+</span><span class="marked0"><a name="line62"></a>62         value.gsub!(control_codes, '')
+</span><span class="inferred1"><a name="line63"></a>63
+</span><span class="marked0"><a name="line64"></a>64         return value.gsub(/[#{escape_chars.to_a.join}]/) {|s| ESCAPE_TABLE[s]}
+</span><span class="inferred1"><a name="line65"></a>65       end
+</span><span class="inferred0"><a name="line66"></a>66     end
+</span><span class="inferred1"><a name="line67"></a>67   end
+</span><span class="inferred0"><a name="line68"></a>68 end
 </span></pre><hr />    <p>Generated using the <a href='http://eigenclass.org/hiki.rb?rcov'>rcov code coverage analysis tool for Ruby</a> version 0.8.1.2.</p><p>
           <a href='http://validator.w3.org/check/referer'>
             <img src='http://www.w3.org/Icons/valid-xhtml10' height='31' alt='Valid XHTML 1.0!' width='88' />

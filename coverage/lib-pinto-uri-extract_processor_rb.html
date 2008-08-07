@@ -556,7 +556,7 @@ span.run100 {
       </head>
       <body>
         <h3>C0 code coverage information</h3>
-        <p>Generated on Thu Aug 07 00:39:22 +0900 2008 with <a href='http://eigenclass.org/hiki/rcov'>rcov 0.8.1.2</a>
+        <p>Generated on Thu Aug 07 23:13:35 +0900 2008 with <a href='http://eigenclass.org/hiki/rcov'>rcov 0.8.1.2</a>
         </p>
         <hr /><pre><span class='marked0'>Code reported as executed by Ruby looks like this...
 </span><span class='marked1'>and this: this line is also marked as covered.
@@ -619,41 +619,41 @@ span.run100 {
           </td>
         </tr>
       </tbody>
-    </table><pre><span class="inferred1"><a name="line1"></a> 1 # lib/pinto/uri/extract_processor.rb
-</span><span class="marked0"><a name="line2"></a> 2 module Pinto
-</span><span class="marked1"><a name="line3"></a> 3   module URI
-</span><span class="marked0"><a name="line4"></a> 4     class ExtractProcessor
-</span><span class="marked1"><a name="line5"></a> 5       def self.match(name)
-</span><span class="marked0"><a name="line6"></a> 6         unless name.is_a? String
-</span><span class="uncovered1"><a name="line7"></a> 7           raise ArgumentError.new('name must be String')
-</span><span class="uncovered0"><a name="line8"></a> 8         end
-</span><span class="marked1"><a name="line9"></a> 9         return 'ja\.|en\.|'      if name == 'lang'
-</span><span class="marked0"><a name="line10"></a>10         return '\?.+|'           if name == 'query'
-</span><span class="marked1"><a name="line11"></a>11         return '[0-9a-zA-Z_\-]+' if name == 'username'
-</span><span class="marked0"><a name="line12"></a>12         return '.*'
-</span><span class="inferred1"><a name="line13"></a>13       end
-</span><span class="inferred0"><a name="line14"></a>14
-</span><span class="marked1"><a name="line15"></a>15       def self.restore(name, value)
-</span><span class="marked0"><a name="line16"></a>16         unless name.is_a? String
-</span><span class="uncovered1"><a name="line17"></a>17           raise ArgumentError.new('name must be String')
-</span><span class="uncovered0"><a name="line18"></a>18         end
-</span><span class="marked1"><a name="line19"></a>19         unless value.is_a? String
-</span><span class="uncovered0"><a name="line20"></a>20           raise ArgumentError.new('value must be String')
-</span><span class="uncovered1"><a name="line21"></a>21         end
-</span><span class="inferred0"><a name="line22"></a>22
-</span><span class="marked1"><a name="line23"></a>23         case name
-</span><span class="marked0"><a name="line24"></a>24         when 'lang'
-</span><span class="marked1"><a name="line25"></a>25           restore_value = value.gsub(/\.$/, '')
-</span><span class="uncovered0"><a name="line26"></a>26         when 'query'
-</span><span class="uncovered1"><a name="line27"></a>27           restore_value = value.gsub(/^\?/, '')
-</span><span class="uncovered0"><a name="line28"></a>28         else
-</span><span class="uncovered1"><a name="line29"></a>29           restore_value = value
-</span><span class="uncovered0"><a name="line30"></a>30         end
-</span><span class="marked1"><a name="line31"></a>31         return Rack::Utils.unescape(restore_value)
-</span><span class="inferred0"><a name="line32"></a>32       end
-</span><span class="inferred1"><a name="line33"></a>33     end
-</span><span class="inferred0"><a name="line34"></a>34   end
-</span><span class="inferred1"><a name="line35"></a>35 end
+    </table><pre><span class="inferred0"><a name="line1"></a> 1 # lib/pinto/uri/extract_processor.rb
+</span><span class="marked1"><a name="line2"></a> 2 module Pinto
+</span><span class="marked0"><a name="line3"></a> 3   module URI
+</span><span class="marked1"><a name="line4"></a> 4     class ExtractProcessor
+</span><span class="marked0"><a name="line5"></a> 5       def self.match(name)
+</span><span class="marked1"><a name="line6"></a> 6         unless name.is_a? String
+</span><span class="uncovered0"><a name="line7"></a> 7           raise ArgumentError.new('name must be String')
+</span><span class="uncovered1"><a name="line8"></a> 8         end
+</span><span class="marked0"><a name="line9"></a> 9         return 'ja\.|en\.|'      if name == 'lang'
+</span><span class="marked1"><a name="line10"></a>10         return '\?.+|'           if name == 'query'
+</span><span class="marked0"><a name="line11"></a>11         return '[0-9a-zA-Z_\-]+' if name == 'username'
+</span><span class="marked1"><a name="line12"></a>12         return '.*'
+</span><span class="inferred0"><a name="line13"></a>13       end
+</span><span class="inferred1"><a name="line14"></a>14
+</span><span class="marked0"><a name="line15"></a>15       def self.restore(name, value)
+</span><span class="marked1"><a name="line16"></a>16         unless name.is_a? String
+</span><span class="uncovered0"><a name="line17"></a>17           raise ArgumentError.new('name must be String')
+</span><span class="uncovered1"><a name="line18"></a>18         end
+</span><span class="marked0"><a name="line19"></a>19         unless value.is_a? String
+</span><span class="uncovered1"><a name="line20"></a>20           raise ArgumentError.new('value must be String')
+</span><span class="uncovered0"><a name="line21"></a>21         end
+</span><span class="inferred1"><a name="line22"></a>22
+</span><span class="marked0"><a name="line23"></a>23         case name
+</span><span class="marked1"><a name="line24"></a>24         when 'lang'
+</span><span class="marked0"><a name="line25"></a>25           restore_value = value.gsub(/\.$/, '')
+</span><span class="uncovered1"><a name="line26"></a>26         when 'query'
+</span><span class="uncovered0"><a name="line27"></a>27           restore_value = value.gsub(/^\?/, '')
+</span><span class="uncovered1"><a name="line28"></a>28         else
+</span><span class="uncovered0"><a name="line29"></a>29           restore_value = value
+</span><span class="uncovered1"><a name="line30"></a>30         end
+</span><span class="marked0"><a name="line31"></a>31         return Rack::Utils.unescape(restore_value)
+</span><span class="inferred1"><a name="line32"></a>32       end
+</span><span class="inferred0"><a name="line33"></a>33     end
+</span><span class="inferred1"><a name="line34"></a>34   end
+</span><span class="inferred0"><a name="line35"></a>35 end
 </span></pre><hr />    <p>Generated using the <a href='http://eigenclass.org/hiki.rb?rcov'>rcov code coverage analysis tool for Ruby</a> version 0.8.1.2.</p><p>
           <a href='http://validator.w3.org/check/referer'>
             <img src='http://www.w3.org/Icons/valid-xhtml10' height='31' alt='Valid XHTML 1.0!' width='88' />
