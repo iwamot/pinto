@@ -53,7 +53,7 @@ end
 
 desc 'Format for Git'
 task :format do
-  Dir.glob('{lib,coverage,spec}/**/*.{rb,html}') do |f|
+  Dir.glob('{lib,spec}/**/*.rb') do |f|
     contents = File.read(f)
     contents = NKF.nkf('-Lu', contents)
     contents.gsub!(/ +(\n)/, '\1')
