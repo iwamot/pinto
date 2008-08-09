@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%== in_quote(@lang) %>">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%== attr(@lang) %>">
 <head>
 <title>Pinto</title>
 </head>
 <body>
-<h1><a rel="start" href="<%== in_quote(uri('index', 'lang' => @lang)) %>">Pinto</a></h1>
+<h1><a rel="start" href="<%== attr(uri('index', 'lang' => @lang)) %>">Pinto</a></h1>
 <% unless @error_message.nil? %><p><%= @error_message %></p><% end %>
-<form method="post" action="<%== in_quote(uri('users', 'lang' => @lang)) %>">
+<form method="post" action="<%== attr(uri('users', 'lang' => @lang)) %>">
 <p>
 <%= _('User name') %>:
-<input type="text" name="user_name" value="<%== in_quote(@user_name) %>" />
-<input type="submit" value="<%== in_quote(_('OK')) %>" />
-<input type="hidden" name="claimed_id" value="<%== in_quote(@claimed_id) %>" />
+<input type="text" name="user_name" value="<%== attr(@user_name) %>" />
+<input type="submit" value="<%== attr(_('OK')) %>" />
+<input type="hidden" name="claimed_id" value="<%== attr(@claimed_id) %>" />
 </p>
 </form>
 </body>

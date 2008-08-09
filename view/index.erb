@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%== in_quote(@lang) %>">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%== attr(@lang) %>">
 <head>
 <title>Pinto</title>
 </head>
 <body>
 <h1>Pinto</h1>
 <ul>
-<li><a href="<%== in_quote(uri('signup_openid', 'lang' => @lang)) %>"><%= _('Sign up') %></a></li>
+<li><a href="<%== attr(uri('signup_openid', 'lang' => @lang)) %>"><%= _('Sign up') %></a></li>
 <% @other_langs.each do |lang| %>
-<li><a rel="alternate" hreflang="<%== in_quote(lang.code.to_s) %>" href="<%== in_quote(uri('index', 'lang' => lang.code.to_s)) %>"><%= _('%{language} version of this page') % {:language => _(lang.name.to_s)} %></a></li>
+<li><a rel="alternate" hreflang="<%== attr(lang.code.to_s) %>" href="<%== attr(uri('index', 'lang' => lang.code.to_s)) %>"><%= _('%{language} version of this page') % {:language => _(lang.name.to_s)} %></a></li>
 <% end %>
 </ul>
 </body>

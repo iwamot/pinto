@@ -3,6 +3,7 @@ module Pinto
   module Helper
     module URI
       module_function
+
       def uri(controller_name, param = {})
         unless controller_name.is_a? String
           raise ArgumentError.new('controller_name must be String')

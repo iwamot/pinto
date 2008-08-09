@@ -55,7 +55,7 @@ desc 'Format for Git'
 task :format do
   Dir.glob('{lib,spec}/**/*.rb') do |f|
     contents = File.read(f)
-    contents = NKF.nkf('-Lu', contents)
+    contents = NKF.nkf('-w -Lu', contents)
     contents.gsub!(/ +(\n)/, '\1')
 
     file = File.open(f, 'w').binmode

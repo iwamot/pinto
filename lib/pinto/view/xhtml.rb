@@ -14,12 +14,8 @@ module Pinto
           raise ArgumentError.new('param must be Pinto::Type::ViewParam')
         end
 
-        context = Erubis::Context.new(param.to_hash)
-        context.extend(Pinto::Helper::HTML)
-        context.extend(Pinto::Helper::URI)
-
+        context = Pinto::View::Context.new(param)
         if param.to_hash.has_key? :lang
-          context.extend(Pinto::Helper::Translate)
           language = Pinto::Language::Code.new(param.to_hash[:lang])
           context.set_language(language)
         end

@@ -34,9 +34,9 @@ describe 'Pinto::Language.list' do
     languages = Pinto::Language.list(disp_lang)
     languages.should == [
       Pinto::Language.new(Pinto::Language::Code.new('en'),
-                          Pinto::Language::Name.new('$B1Q8l(B')),
+                          Pinto::Language::Name.new('英語')),
       Pinto::Language.new(Pinto::Language::Code.new('ja'),
-                          Pinto::Language::Name.new('$BF|K\8l(B'))
+                          Pinto::Language::Name.new('日本語'))
     ]
   end
 end
@@ -62,7 +62,7 @@ describe 'Pinto::Language.others' do
     other_languages = Pinto::Language.others(base_lang)
     other_languages.should == [
       Pinto::Language.new(Pinto::Language::Code.new('en'),
-                          Pinto::Language::Name.new('$B1Q8l(B'))
+                          Pinto::Language::Name.new('英語'))
     ]
   end
 end
