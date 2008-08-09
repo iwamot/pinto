@@ -14,7 +14,7 @@ module Pinto
       def self.add(user_name, open_id, lang)
         user_name = user_name.to_s
         if user_name.empty?
-          translator = Pinto::Translate.new(lang)
+          translator = Pinto::Translator.new(lang)
           message = translator._('%{param} is required') % {
             :param => translator._('User name')
           }
@@ -23,7 +23,7 @@ module Pinto
 
         open_id = open_id.to_s
         if open_id.empty?
-          translator = Pinto::Translate.new(lang)
+          translator = Pinto::Translator.new(lang)
           message = translator._('%{param} is required') % {
             :param => 'OpenID'
           }

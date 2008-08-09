@@ -11,8 +11,8 @@ module Pinto
         request_lang = request.get_uri_map.to_hash['lang']
         if request_lang.empty?
           http_status_code = Pinto::Type::HttpStatusCode.new(400)
-          translator = Pinto::Translate.new(
-            Pinto::Language::Code.new(request_lang)
+          translator = Pinto::Translator.new(
+            Pinto::Locale.new(request_lang)
           )
           message = translator._('URI contains no valid language')
           message = Pinto::Type::ErrorMessage.new(message)
@@ -26,8 +26,8 @@ module Pinto
         claimed_id = Pinto::OpenID.complete(query_strings, current_uri)
         if claimed_id.nil?
           http_status_code = Pinto::Type::HttpStatusCode.new(400)
-          translator = Pinto::Translate.new(
-            Pinto::Language::Code.new(request_lang)
+          translator = Pinto::Translator.new(
+            Pinto::Locale.new(request_lang)
           )
           message = translator._('OpenID authentication failed')
           message = Pinto::Type::ErrorMessage.new(message)
@@ -40,8 +40,8 @@ module Pinto
           Pinto::Type::ClaimedID.new(claimed_id)
         )
 
-        base_lang = Pinto::Language::Code.new(request_lang)
-        other_languages = Pinto::Language.others(base_lang)
+        base_lang = Pinto::Locale.new(request_lang)
+        other_languages = base_lang.others
         param = {
           :lang       => request_lang,
           :claimed_id => claimed_id,

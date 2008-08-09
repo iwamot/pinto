@@ -19,7 +19,7 @@
 </form>
 <ul>
 <% @other_langs.each do |lang| %>
-<li><a rel="alternate" hreflang="<%== attr(lang.code.to_s) %>" href="<%== attr(uri('signup_openid', 'lang' => lang.code.to_s)) %>"><%= _('%{language} version of this page') % {:language => _(lang.name.to_s)} %></a></li>
+<li><a rel="alternate" hreflang="<%== attr(lang.to_s) %>" href="<%== attr(uri('signup_openid', 'lang' => lang.to_s)) %>"><%= _('%{language} version of this page') % {:language => lang.name(self)} %></a></li>
 <% end %>
 </ul>
 </body>

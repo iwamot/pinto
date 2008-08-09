@@ -8,7 +8,7 @@
 <h1><% unless @controller == 'index' %><a rel="start" href="<%== attr(uri('index')) %>"><% end %>Pinto<% unless @controller == 'index' %></a><% end %></h1>
 <ul>
 <% @languages.each do |lang| %>
-<li><a rel="alternate" hreflang="<%== attr(lang.code.to_s) %>" href="<%== attr(uri(@controller, @uri_map.merge('lang' => lang.code.to_s))) %>"><%= lang.name.to_s %> version</a></li>
+<li><a rel="alternate" hreflang="<%== attr(lang.to_s) %>" href="<%== attr(uri(@controller, @uri_map.merge('lang' => lang.to_s))) %>"><%= lang.name(self) %> version</a></li>
 <% end %>
 </ul>
 </body>

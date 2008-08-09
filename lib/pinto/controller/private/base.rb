@@ -24,7 +24,7 @@ module Pinto
           end
 
           http_status_code = Pinto::Type::HttpStatusCode.new(405)
-          translator = Pinto::Translate.new(request.get_uri_map['lang'])
+          translator = Pinto::Translator.new(request.get_uri_map['lang'])
           message = translator._(
             'Requested HTTP method is invalid for this resource'
           )

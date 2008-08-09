@@ -16,8 +16,8 @@ module Pinto
         begin
           Pinto::Model::User.add(user_name, claimed_id)
         rescue => e
-          base_lang = Pinto::Language::Code.new(request_lang)
-          other_languages = Pinto::Language.others(base_lang)
+          base_lang = Pinto::Locale.new(request_lang)
+          other_languages = base_lang.others
           param = {
             :lang          => request_lang,
             :user_name     => user_name,

@@ -7,8 +7,8 @@ module Pinto
           'user_supplied_id must be Pinto::Type::UserSuppliedID'
         )
       end
-      unless lang.is_a? Pinto::Language::Code
-        raise ArgumentError.new('lang must be Pinto::Language::Code')
+      unless lang.is_a? Pinto::Locale
+        raise ArgumentError.new('lang must be Pinto::Locale')
       end
       request = self.consumer.begin(user_supplied_id.to_s)
 

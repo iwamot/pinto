@@ -13,8 +13,8 @@ module Pinto
           return Pinto::Controller::Private::Multiple.run(request)
         end
 
-        base_lang = Pinto::Language::Code.new(request_lang)
-        other_languages = Pinto::Language.others(base_lang)
+        base_lang = Pinto::Locale.new(request_lang)
+        other_languages = base_lang.others
         param = {
           :lang        => request_lang,
           :other_langs => other_languages

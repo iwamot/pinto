@@ -15,7 +15,7 @@ module Pinto
         providers = Pinto::Config.load(config_key)
         unless providers.include? openid
           http_status_code = Pinto::Type::HttpStatusCode.new(400)
-          translator = Pinto::Translate.new(request_lang)
+          translator = Pinto::Translator.new(request_lang)
           message = translator._('Requested OpenID provider is not permitted')
           message = Pinto::Type::ErrorMessage.new(message)
           return Pinto::Controller::Private::Error.run(
@@ -25,7 +25,7 @@ module Pinto
 
         if request_lang.empty?
           http_status_code = Pinto::Type::HttpStatusCode.new(400)
-          translator = Pinto::Translate.new(request_lang)
+          translator = Pinto::Translator.new(request_lang)
           message = translator._('URI contains no valid language')
           message = Pinto::Type::ErrorMessage.new(message)
           return Pinto::Controller::Private::Error.run(
@@ -34,7 +34,7 @@ module Pinto
         end
 
         user_supplied_id = Pinto::Type::UserSuppliedID.new(openid)
-        lang = Pinto::Language::Code.new(request_lang)
+        lang = Pinto::Locale.new(request_lang)
         redirect_uri = Pinto::OpenID.begin(user_supplied_id, lang)
 
         return [

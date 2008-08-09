@@ -33,7 +33,7 @@ module Pinto
 =begin
     rescue => exception
       http_status_code = Pinto::Type::HttpStatusCode.new(500)
-      translator = Pinto::Translate.new(request.get_uri_map['lang'])
+      translator = Pinto::Translater.new(request.get_uri_map['lang'])
 #      message = translator._('Server error occurred')
       message = Pinto::Type::ErrorMessage.new(exception.message)
       return Pinto::Controller::Private::Error.run(

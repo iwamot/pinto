@@ -16,8 +16,8 @@ module Pinto
 
         context = Pinto::View::Context.new(param)
         if param.to_hash.has_key? :lang
-          language = Pinto::Language::Code.new(param.to_hash[:lang])
-          context.set_language(language)
+          locale = Pinto::Locale.new(param.to_hash[:lang])
+          context.locale = locale
         end
 
         super(context)
