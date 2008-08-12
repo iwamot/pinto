@@ -1,39 +1,27 @@
-# lib/pinto/controller/index.rb
 module Pinto
   module Controller
     class Index
-      include Pinto::Controller::Private::Base
+      include Pinto::Controller::Base
+
       def get_action(request)
-        unless request.is_a? Pinto::Request
-          raise ArgumentError.new('request must be Pinto::Request')
+        request = Pinto::HTTP::Request.new(request)
+
+        if request.no_locale?
+          return Pinto::Controller::Multiple.run(request)
         end
 
-        request_lang = request.get_uri_map.to_hash['lang']
-        if request_lang.empty?
-          return Pinto::Controller::Private::Multiple.run(request)
-        end
+        view = Pinto::View.new
+        view.name = 'index'
+        view.set_parameter(:locale_code, request.locale_code)
+        view.set_parameter(:other_locales,
+                           Pinto::Locale.others(request.locale_code))
 
-        base_lang = Pinto::Locale.new(request_lang)
-        other_languages = base_lang.others
-        param = {
-          :lang        => request_lang,
-          :other_langs => other_languages
-        }
-
-        view_name  = Pinto::Type::ViewName.new('index')
-        view_param = Pinto::Type::ViewParam.new(param)
-        response_body = Pinto::View.render(view_name, view_param)
-
-        platonic_uri = Pinto::Helper::URI.uri('index')
-
-        return [
-          200,
-          {
-            'Content-Type'     => 'application/xhtml+xml; charset=UTF-8',
-            'Content-Location' => platonic_uri
-          },
-          [response_body]
-        ]
+        response = Pinto::HTTP::Response.new
+        response.status_code = 200
+        response.content_type = 'application/xhtml+xml; charset=UTF-8'
+        response.content_location = Pinto::Helper::URI.expand('index')
+        response.body = view.render
+        return response
       end
     end
   end

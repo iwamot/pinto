@@ -1,11 +1,9 @@
-# lib/pinto/encoding/utf8.rb
 module Pinto
   module Encoding
     class UTF8
       def self.valid?(value)
-        unless value.is_a? String
-          raise ArgumentError.new('value must be String')
-        end
+        value = value.to_s
+
         valid_utf8 = /^(?:
            [\x00-\x7F]                    # U+0000   - U+007F
           |[\xC2-\xDF][\x80-\xBF]         # U+0080   - U+07FF

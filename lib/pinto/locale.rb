@@ -1,47 +1,49 @@
-# lib/pinto/locale.rb
 module Pinto
   class Locale
-    LIST = ['en', 'ja']
-
     def self.list
-      return LIST.map do |locale|
-        Pinto::Locale.new(locale)
-      end
+      translator = Pinto::Translator.new
+      return [
+        Pinto::Locale.new(Pinto::Locale::Code.new('en'),
+                          translator._('English')),
+        Pinto::Locale.new(Pinto::Locale::Code.new('ja'),
+                          translator._('Japanese')),
+      ]
     end
 
-    def initialize(locale)
-      unless locale.is_a? String
-        raise ArgumentError.new('locale must be String')
-      end
-
-      @locale = locale
+    def initialize(code, name)
+      self.code = code
+      self.name = name
     end
 
-    def others
+    def self.others(locale_code)
+      locale_code = Pinto::Locale::Code.new(locale_code)
       return Pinto::Locale.list.delete_if do |locale|
-        locale == self
+        locale.code == locale_code
       end
     end
 
-    def to_s
-      return @locale
+    def code=(code)
+      @code = Pinto::Locale::Code.new(code)
     end
 
-    def name(translator)
-      unless translator.respond_to? '_'
-        raise ArgumentError.new('translator must have "_" method')
+    def code
+      return @code
+    end
+
+    def name=(name)
+      unless name.respond_to? :to_s
+        raise TypeError.new('name must respond to #to_s')
       end
 
-      case self.to_s
-      when 'en'
-        return translator._('English')
-      when 'ja'
-        return translator._('Japanese')
-      end
+      @name = name.to_s
+    end
+
+    def name
+      return @name
     end
 
     def ==(other)
-      return (self.to_s == other.to_s)
+      return (self.code == other.code && self.name == other.name)
     end
   end
 end

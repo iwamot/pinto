@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pinto 0.0.1\n"
-"POT-Creation-Date: 2008-07-31 21:11+0900\n"
-"PO-Revision-Date: 2008-07-31 21:12+0900\n"
+"POT-Creation-Date: 2008-08-11 21:06+0900\n"
+"PO-Revision-Date: 2008-08-11 21:09+0900\n"
 "Last-Translator: IWAMOTO Takashi <hello@iwamot.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,39 +16,30 @@ msgstr ""
 # This file is distributed under the same license as the Pinto package.
 # IWAMOTO Takashi <hello@iwamot.com>, 2008.
 #
-#: lib/pinto/controller/private/base.rb:25
+#: lib/pinto/controller/private/base.rb:27
 msgid "Requested HTTP method is invalid for this resource"
 msgstr "要求されたHTTPメソッドは、このリソースに対しては無効です"
 
-#: lib/pinto/controller/signup_account.rb:12
-#: lib/pinto/controller/signup_auth.rb:21
+#: lib/pinto/controller/signup_account.rb:16
+#: lib/pinto/controller/signup_auth.rb:28
 msgid "URI contains no valid language"
 msgstr "URIに有効な言語が含まれていません"
 
-#: lib/pinto/controller/signup_account.rb:19
+#: lib/pinto/controller/signup_account.rb:31
 msgid "OpenID authentication failed"
 msgstr "OpenID認証に失敗しました"
 
-#: lib/pinto/controller/signup_auth.rb:15
+#: lib/pinto/controller/signup_auth.rb:18
 msgid "Requested OpenID provider is not permitted"
 msgstr "指定されたOpenIDプロバイダは許可されていません"
 
-#: lib/pinto/language.rb:8
+#: lib/pinto/locale.rb:7
 msgid "English"
 msgstr "英語"
 
-#: lib/pinto/language.rb:9
+#: lib/pinto/locale.rb:9
 msgid "Japanese"
 msgstr "日本語"
-
-#: lib/pinto/model/user.rb:9
-msgid "%{param} is required"
-msgstr "%{param}は必須です"
-
-#: lib/pinto/model/user.rb:10
-#: view/signup_account.erb:12
-msgid "User name"
-msgstr "ユーザー名"
 
 #: view/index.erb:10
 msgid "Sign up"
@@ -56,8 +47,12 @@ msgstr "ユーザー登録"
 
 #: view/index.erb:12
 #: view/signup_openid.erb:22
-msgid "%{language} version of this page"
-msgstr "このページの%{language}版"
+msgid "%{locale_name} version of this page"
+msgstr "このページの%{locale_name}版"
+
+#: view/signup_account.erb:12
+msgid "User name"
+msgstr "ユーザー名"
 
 #: view/signup_account.erb:14
 #: view/signup_openid.erb:17
@@ -67,7 +62,3 @@ msgstr "OK"
 #: view/signup_openid.erb:11
 msgid "OpenID provider"
 msgstr "OpenIDプロバイダ"
-
-#~ msgid "Server error occurred"
-#~ msgstr "サーバーエラーが発生しました"
-

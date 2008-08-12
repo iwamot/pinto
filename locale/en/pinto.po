@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pinto 0.0.1\n"
-"POT-Creation-Date: 2008-07-31 21:11+0900\n"
-"PO-Revision-Date: 2008-07-31 21:11+0900\n"
+"POT-Creation-Date: 2008-08-11 21:06+0900\n"
+"PO-Revision-Date: 2008-08-11 21:08+0900\n"
 "Last-Translator: IWAMOTO Takashi <hello@iwamot.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,39 +16,30 @@ msgstr ""
 # This file is distributed under the same license as the Pinto package.
 # IWAMOTO Takashi <hello@iwamot.com>, 2008.
 #
-#: lib/pinto/controller/private/base.rb:25
+#: lib/pinto/controller/private/base.rb:27
 msgid "Requested HTTP method is invalid for this resource"
 msgstr "Requested HTTP method is invalid for this resource"
 
-#: lib/pinto/controller/signup_account.rb:12
-#: lib/pinto/controller/signup_auth.rb:21
+#: lib/pinto/controller/signup_account.rb:16
+#: lib/pinto/controller/signup_auth.rb:28
 msgid "URI contains no valid language"
 msgstr "URI contains no valid language"
 
-#: lib/pinto/controller/signup_account.rb:19
+#: lib/pinto/controller/signup_account.rb:31
 msgid "OpenID authentication failed"
 msgstr "OpenID authentication failed"
 
-#: lib/pinto/controller/signup_auth.rb:15
+#: lib/pinto/controller/signup_auth.rb:18
 msgid "Requested OpenID provider is not permitted"
 msgstr "Requested OpenID provider is not permitted"
 
-#: lib/pinto/language.rb:8
+#: lib/pinto/locale.rb:7
 msgid "English"
 msgstr "English"
 
-#: lib/pinto/language.rb:9
+#: lib/pinto/locale.rb:9
 msgid "Japanese"
 msgstr "Japanese"
-
-#: lib/pinto/model/user.rb:9
-msgid "%{param} is required"
-msgstr "%{param} is required"
-
-#: lib/pinto/model/user.rb:10
-#: view/signup_account.erb:12
-msgid "User name"
-msgstr "User name"
 
 #: view/index.erb:10
 msgid "Sign up"
@@ -56,8 +47,12 @@ msgstr "Sign up"
 
 #: view/index.erb:12
 #: view/signup_openid.erb:22
-msgid "%{language} version of this page"
-msgstr "%{language} version of this page"
+msgid "%{locale_name} version of this page"
+msgstr "%{locale_name} version of this page"
+
+#: view/signup_account.erb:12
+msgid "User name"
+msgstr "User name"
 
 #: view/signup_account.erb:14
 #: view/signup_openid.erb:17
@@ -67,7 +62,3 @@ msgstr "OK"
 #: view/signup_openid.erb:11
 msgid "OpenID provider"
 msgstr "OpenID provider"
-
-#~ msgid "Server error occurred"
-#~ msgstr "Server error occurred"
-

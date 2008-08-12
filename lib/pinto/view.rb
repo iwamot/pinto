@@ -1,15 +1,34 @@
-# lib/pinto/view.rb
 module Pinto
   class View
-    def self.render(name, param = Pinto::Type::ViewParam.new({}))
-      unless name.is_a? Pinto::Type::ViewName
-        raise ArgumentError.new('name must be Pinto::Type::ViewName')
+    def initialize
+      @parameters = Pinto::View::Parameters.new
+    end
+
+    def set_parameter(symbol, value)
+      unless symbol.is_a? Symbol
+        raise TypeError.new('symbol must be Symbol')
       end
-      unless param.is_a? Pinto::Type::ViewParam
-        raise ArgumentError.new('param must be Pinto::Type::ViewParam')
-      end
-      template = File.read("view/#{name.to_s}.erb")
-      return Pinto::View::XHTML.new(template).evaluate(param)
+
+      @parameters.set(symbol, value)
+    end
+
+    def parameters
+      return @parameters
+    end
+
+    def name=(name)
+      @name = Pinto::View::Name.new(name)
+    end
+
+    def name
+      return @name
+    end
+
+    def render
+      template = File.read("view/#{self.name.to_s}.erb")
+      return Pinto::HTTP::Response::Body.new(
+        Pinto::View::XHTML.new(template).evaluate(self.parameters)
+      )
     end
   end
 end

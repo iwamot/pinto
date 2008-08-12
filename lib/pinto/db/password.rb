@@ -1,17 +1,19 @@
-# lib/pinto/db/password.rb
 module Pinto
   module DB
     class Password
       def initialize(password)
-        unless password.is_a? String
-          raise ArgumentError.new('password must be String')
+        unless password.respond_to? :to_s
+          raise TypeError.new('password must respond to #to_s')
         end
-        @password = password
+
+        @password = password.to_s
       end
 
       def to_s
         return @password
       end
+
+      alias to_str to_s
     end
   end
 end

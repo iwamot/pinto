@@ -5,11 +5,17 @@
 <title>Pinto</title>
 </head>
 <body>
-<h1><% unless @controller == 'index' %><a rel="start" href="<%== attr(uri('index')) %>"><% end %>Pinto<% unless @controller == 'index' %></a><% end %></h1>
+<h1><% unless @requested_controller_name == 'index' %><a rel="start" href="<%== attr(uri('index')) %>"><% end %>Pinto<% unless @requested_controller_name == 'index' %></a><% end %></h1>
 <ul>
-<% @languages.each do |lang| %>
-<li><a rel="alternate" hreflang="<%== attr(lang.to_s) %>" href="<%== attr(uri(@controller, @uri_map.merge('lang' => lang.to_s))) %>"><%= lang.name(self) %> version</a></li>
-<% end %>
+<%
+@locales.each do |locale|
+  uri_parameters = @uri_parameters
+  uri_parameters.locale_code = locale.code
+%>
+<li><a rel="alternate" hreflang="<%== attr(locale.code) %>" href="<%== attr(uri(@requested_controller_name, uri_parameters)) %>"><%= _(locale.name) %> version</a></li>
+<%
+end
+%>
 </ul>
 </body>
 </html>

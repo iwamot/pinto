@@ -1,4 +1,3 @@
-# lib/pinto/pathname.rb
 class Pathname
   def get_class
     self.to_classname.split('::').inject(Object) do |parent, child|

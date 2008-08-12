@@ -1,34 +1,26 @@
-# lib/pinto/open_id.rb
 module Pinto
   class OpenID
-    def self.begin(user_supplied_id, lang)
-      unless user_supplied_id.is_a? Pinto::Type::UserSuppliedID
-        raise ArgumentError.new(
-          'user_supplied_id must be Pinto::Type::UserSuppliedID'
-        )
-      end
-      unless lang.is_a? Pinto::Locale
-        raise ArgumentError.new('lang must be Pinto::Locale')
-      end
+    def self.begin(user_supplied_id, locale_code)
+      user_supplied_id = Pinto::OpenID::UserSuppliedID.new(user_supplied_id)
+      locale_code = Pinto::Locale::Code.new(locale_code)
+
       request = self.consumer.begin(user_supplied_id.to_s)
 
-      realm     = Pinto::Helper::URI.uri('index',          'lang' => lang.to_s)
-      return_to = Pinto::Helper::URI.uri('signup_account', 'lang' => lang.to_s)
+      realm     = Pinto::Helper::URI.expand('index',
+                                            'locale_code' => locale_code)
+      return_to = Pinto::Helper::URI.expand('signup_account',
+                                            'locale_code' => locale_code)
 
-      return request.redirect_url(realm, return_to)
+      return request.redirect_url(realm.to_s, return_to.to_s)
     end
 
-    def self.complete(query, uri)
-      unless query.is_a? Pinto::Type::QueryStrings
-        raise ArgumentError.new('query must be Pinto::Type::QueryStrings')
-      end
-      unless uri.is_a? Pinto::Type::URI
-        raise ArgumentError.new('uri must be Pinto::Type::URI')
-      end
+    def self.complete(query_strings, uri)
+      query_strings = Pinto::URI::QueryStrings.new(query_strings)
+      uri = Pinto::URI.new(uri)
 
-      response = self.consumer.complete(query.to_hash, uri.to_s)
+      response = self.consumer.complete(query_strings.to_hash, uri.to_s)
       unless response.is_a? ::OpenID::Consumer::SuccessResponse
-        return nil
+        raise RuntimeError.new(response.message)
       end
       return response.identity_url
     end

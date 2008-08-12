@@ -1,62 +1,42 @@
-# lib/pinto/controller/signup_account.rb
 module Pinto
   module Controller
     class SignupAccount
-      include Pinto::Controller::Private::Base
+      include Pinto::Controller::Base
+
       def get_action(request)
-        unless request.is_a? Pinto::Request
-          raise ArgumentError.new('request must be Pinto::Request')
-        end
+        request = Pinto::HTTP::Request.new(request)
 
-        request_lang = request.get_uri_map.to_hash['lang']
-        if request_lang.empty?
-          http_status_code = Pinto::Type::HttpStatusCode.new(400)
-          translator = Pinto::Translator.new(
-            Pinto::Locale.new(request_lang)
-          )
-          message = translator._('URI contains no valid language')
-          message = Pinto::Type::ErrorMessage.new(message)
-          return Pinto::Controller::Private::Error.run(
-            request, http_status_code, message
+        if request.no_locale?
+          return Pinto::Controller::Error.run(
+            request, 400, Pinto::Translator.new._(
+              'URI contains no valid language'
+            )
           )
         end
 
-        query_strings = Pinto::Type::QueryStrings.new(request.GET)
-        current_uri   = Pinto::Type::URI.new(request.url)
-        claimed_id = Pinto::OpenID.complete(query_strings, current_uri)
-        if claimed_id.nil?
-          http_status_code = Pinto::Type::HttpStatusCode.new(400)
-          translator = Pinto::Translator.new(
-            Pinto::Locale.new(request_lang)
-          )
-          message = translator._('OpenID authentication failed')
-          message = Pinto::Type::ErrorMessage.new(message)
-          return Pinto::Controller::Private::Error.run(
-            request, http_status_code, message
+        begin
+          claimed_id = Pinto::OpenID.complete(request.query_strings,
+                                              request.uri)
+        rescue
+          return Pinto::Controller::Error.run(
+            request, 400, Pinto::Translator.new(request.locale_code)._(
+              'OpenID authentication failed'
+            )
           )
         end
 
-        Pinto::Model::SignupReservation.add(
-          Pinto::Type::ClaimedID.new(claimed_id)
-        )
+        Pinto::Model::SignupReservation.add(claimed_id)
 
-        base_lang = Pinto::Locale.new(request_lang)
-        other_languages = base_lang.others
-        param = {
-          :lang       => request_lang,
-          :claimed_id => claimed_id,
-          :user_name  => ''
-        }
+        view = Pinto::View.new
+        view.name = 'signup_account'
+        view.set_parameter(:locale_code, request.locale_code)
+        view.set_parameter(:claimed_id, claimed_id)
 
-        view_name  = Pinto::Type::ViewName.new('signup_account')
-        view_param = Pinto::Type::ViewParam.new(param)
-        response_body = Pinto::View.render(view_name, view_param)
-
-        return [
-          200,
-          {'Content-Type' => 'application/xhtml+xml; charset=UTF-8'},
-          [response_body]
-        ]
+        response = Pinto::HTTP::Response.new
+        response.status_code = 200
+        response.content_type = 'application/xhtml+xml; charset=UTF-8'
+        response.body = view.render
+        return response
       end
     end
   end

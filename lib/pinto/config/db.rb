@@ -1,4 +1,3 @@
-# lib/pinto/config/db.rb
 module Pinto
   class Config
     class DB
@@ -13,18 +12,10 @@ module Pinto
       end
 
       def initialize(host, name, user, password)
-        unless host.is_a? Pinto::DB::Host
-          raise ArgumentError.new('host must be Pinto::DB::Host')
-        end
-        unless name.is_a? Pinto::DB::Name
-          raise ArgumentError.new('name must be Pinto::DB::Name')
-        end
-        unless user.is_a? Pinto::DB::User
-          raise ArgumentError.new('user must be Pinto::DB::User')
-        end
-        unless password.is_a? Pinto::DB::Password
-          raise ArgumentError.new('password must be Pinto::DB::Password')
-        end
+        host = Pinto::DB::Host.new(host)
+        name = Pinto::DB::Name.new(name)
+        user = Pinto::DB::User.new(user)
+        password = Pinto::DB::Password.new(password)
 
         @host     = host
         @name     = name

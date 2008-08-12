@@ -45,16 +45,16 @@ describe 'Pinto::Locale#to_s' do
 end
 
 describe 'Pinto::Locale#name' do
-  it 'should return name in English when translator.locale is English' do
+  it 'should return "English" when locale is "en"' do
     locale = Pinto::Locale.new('en')
-    name = locale.name(Pinto::Translator.new(locale))
+    name = locale.name
     name.should == 'English'
   end
 
-  it 'should return name in Japanese when translator.locale is Japanese' do
+  it 'should return "Japanese" when locale is "ja"' do
     locale = Pinto::Locale.new('ja')
-    name = locale.name(Pinto::Translator.new(locale))
-    name.should == '日本語'
+    name = locale.name
+    name.should == 'Japanese'
   end
 end
 

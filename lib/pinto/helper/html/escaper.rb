@@ -1,32 +1,31 @@
-# lib/pinto/helper/html/escaper.rb
 module Pinto
   module Helper
     module HTML
       module Escaper
         def escape_value(value)
-          unless value.is_a? String
-            raise ArgumentError.new('value must be String')
+          unless value.respond_to? 'to_s'
+            raise ArgumentError.new('value must respond to to_s')
           end
 
-          escape_chars = Pinto::Type::EscapeChars.new(['&', '<', '>'])
-          return eliminate(value, escape_chars)
+          escape_chars = Pinto::Characters.new(['&', '<', '>'])
+          return eliminate(value.to_s, escape_chars)
         end
 
         def escape_attribute(value)
-          unless value.is_a? String
-            raise ArgumentError.new('value must be String')
+          unless value.respond_to? 'to_s'
+            raise ArgumentError.new('value must respond to to_s')
           end
 
-          escape_chars = Pinto::Type::EscapeChars.new(['&', '<', '>', '"'])
-          return eliminate(value, escape_chars)
+          escape_chars = Pinto::Characters.new(['&', '<', '>', '"'])
+          return eliminate(value.to_s, escape_chars)
         end
 
         def escape_tag(value)
-          unless value.is_a? String
-            raise ArgumentError.new('value must be String')
+          unless value.respond_to? 'to_s'
+            raise ArgumentError.new('value must respond to to_s')
           end
 
-          return eliminate(value)
+          return eliminate(value.to_s)
         end
 
         private
@@ -38,15 +37,13 @@ module Pinto
           '"' => '&quot;'
         }
 
-        def eliminate(value, escape_chars = Pinto::Type::EscapeChars.new([]))
-          unless value.is_a? String
-            raise ArgumentError.new('value must be String')
+        def eliminate(value, escape_chars = [])
+          unless value.respond_to? 'to_s'
+            raise TypeError.new('value must respond to #to_s')
           end
-          unless escape_chars.is_a? Pinto::Type::EscapeChars
-            raise ArgumentError.new(
-              'escape_chars must be Pinto::Type::EscapeChars'
-            )
-          end
+
+          value = value.to_s
+          escape_chars = Pinto::Characters.new(escape_chars)
 
           unless Pinto::Encoding::UTF8.valid? value
             raise ArgumentError.new('value is not UTF-8 string')

@@ -1,22 +1,17 @@
-# lib/pinto/translator.rb
 module Pinto
   class Translator
-    def initialize(locale)
-      unless locale.is_a? Pinto::Locale
-        raise ArgumentError.new('locale must be Pinto::Locale')
-      end
+    def initialize(locale_code = 'en')
+      locale_code = Pinto::Locale::Code.new(locale_code)
 
       @translator = Class.new
       @translator.extend(Pinto::Helper::Translator)
-      @translator.locale = locale
+      @translator.locale_code = locale_code
     end
 
     def _(message_id)
-      unless message_id.is_a? String
-        raise ArgumentError.new('message_id must be String')
-      end
+      message_id = Pinto::Translate::MessageID.new(message_id)
 
-      return @translator._(message_id)
+      return @translator._(message_id.to_s)
     end
   end
 end

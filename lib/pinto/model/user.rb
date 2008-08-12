@@ -1,13 +1,12 @@
-# lib/pinto/model/user.rb
 module Pinto
   module Model
     class User
       def self.add(user_name, claimed_id)
-        unless user_name.is_a? Pinto::Type::UserName
-          raise ArgumentError.new('user_name must be Pinto::Type::UserName')
+        unless user_name.is_a? Pinto::User::Name
+          raise TypeError.new('user_name must be Pinto::User::Name')
         end
-        unless claimed_id.is_a? Pinto::Type::ClaimedID
-          raise ArgumentError.new('claimed_id must be Pinto::Type::ClaimedID')
+        unless claimed_id.is_a? Pinto::OpenID::ClaimedID
+          raise TypeError.new('claimed_id must be Pinto::OpenID::ClaimedID')
         end
       end
 =begin
@@ -18,7 +17,7 @@ module Pinto
           message = translator._('%{param} is required') % {
             :param => translator._('User name')
           }
-          raise ArgumentError.new(message)
+          raise TypeError.new(message)
         end
 
         open_id = open_id.to_s
@@ -27,7 +26,7 @@ module Pinto
           message = translator._('%{param} is required') % {
             :param => 'OpenID'
           }
-          raise ArgumentError.new(message)
+          raise TypeError.new(message)
         end
       end
 =end

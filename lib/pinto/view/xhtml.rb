@@ -1,26 +1,30 @@
-# lib/pinto/view/xhtml.rb
 module Pinto
   class View
     class XHTML < Erubis::EscapedEruby
-      def escaped_expr(code)
-        unless code.is_a? String
-          raise ArgumentError.new('code must be String')
-        end
-        return "h(#{code})"
-      end
-
-      def evaluate(param)
-        unless param.is_a? Pinto::Type::ViewParam
-          raise ArgumentError.new('param must be Pinto::Type::ViewParam')
+      def evaluate(view_parameters)
+        unless view_parameters.is_a? Pinto::View::Parameters
+          raise TypeError.new(
+            'view_parameters must be Pinto::View::Parameters'
+          )
         end
 
-        context = Pinto::View::Context.new(param)
-        if param.to_hash.has_key? :lang
-          locale = Pinto::Locale.new(param.to_hash[:lang])
-          context.locale = locale
+        context = Pinto::View::Context.new(view_parameters)
+        if view_parameters.to_hash.has_key? :locale_code
+          locale_code = Pinto::Locale::Code.new(
+            view_parameters.to_hash[:locale_code]
+          )
+          context.locale_code = locale_code
         end
 
         super(context)
+      end
+
+      def escaped_expr(code)
+        unless code.is_a? String
+          raise TypeError.new('code must be String')
+        end
+
+        return "h(#{code})"
       end
     end
   end

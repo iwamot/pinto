@@ -1,4 +1,3 @@
-# lib/pinto/view/context.rb
 module Pinto
   class View
     class Context < Erubis::Context
@@ -10,12 +9,14 @@ module Pinto
       alias attr escape_attribute
       alias tag  escape_tag
 
-      def initialize(param)
-        unless param.is_a? Pinto::Type::ViewParam
-          raise ArgumentError.new('param must be Pinto::Type::ViewParam')
+      def initialize(view_parameters)
+        unless view_parameters.is_a? Pinto::View::Parameters
+          raise TypeError.new(
+            'view_parameters must be Pinto::View::Parameters'
+          )
         end
 
-        super(param.to_hash)
+        super(view_parameters.to_hash)
       end
     end
   end

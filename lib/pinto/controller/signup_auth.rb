@@ -1,47 +1,36 @@
-# lib/pinto/controller/signup_auth.rb
 module Pinto
   module Controller
     class SignupAuth
-      include Pinto::Controller::Private::Base
+      include Pinto::Controller::Base
+
       def get_action(request)
-        unless request.is_a? Pinto::Request
-          raise ArgumentError.new('request must be Pinto::Request')
-        end
+        request = Pinto::HTTP::Request.new(request)
 
-        request_lang = request.get_uri_map.to_hash['lang']
-        openid = request.GET['openid']
+        user_supplied_id = Pinto::OpenID::UserSuppliedID.new(
+          request.query('openid')
+        )
 
-        config_key = Pinto::Type::ConfigKey.new('openid_providers')
-        providers = Pinto::Config.load(config_key)
-        unless providers.include? openid
-          http_status_code = Pinto::Type::HttpStatusCode.new(400)
-          translator = Pinto::Translator.new(request_lang)
-          message = translator._('Requested OpenID provider is not permitted')
-          message = Pinto::Type::ErrorMessage.new(message)
-          return Pinto::Controller::Private::Error.run(
-            request, http_status_code, message
+        unless Pinto::Config.valid_openid_provider? user_supplied_id
+          return Pinto::Controller::Error.run(
+            request, 400, Pinto::Translator.new(request.locale_code)._(
+              'Requested OpenID provider is not permitted'
+            )
           )
         end
 
-        if request_lang.empty?
-          http_status_code = Pinto::Type::HttpStatusCode.new(400)
-          translator = Pinto::Translator.new(request_lang)
-          message = translator._('URI contains no valid language')
-          message = Pinto::Type::ErrorMessage.new(message)
-          return Pinto::Controller::Private::Error.run(
-            request, http_status_code, message
+        if request.no_locale?
+          return Pinto::Controller::Error.run(
+            request, 400, Pinto::Translator.new._(
+              'URI contains no valid language'
+            )
           )
         end
 
-        user_supplied_id = Pinto::Type::UserSuppliedID.new(openid)
-        lang = Pinto::Locale.new(request_lang)
-        redirect_uri = Pinto::OpenID.begin(user_supplied_id, lang)
-
-        return [
-          303,
-          {'Location' => redirect_uri, 'Content-Type' => ''},
-          []
-        ]
+        response = Pinto::HTTP::Response.new
+        response.status_code = 303
+        response.location =
+          Pinto::OpenID.begin(user_supplied_id, request.locale_code)
+        return response
       end
     end
   end
