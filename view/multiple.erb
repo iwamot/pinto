@@ -10,7 +10,7 @@
 <%
 @locales.each do |locale|
   uri_parameters = @uri_parameters
-  uri_parameters.locale_code = locale.code
+  uri_parameters['locale_code'] = locale.code
 %>
 <li><a rel="alternate" hreflang="<%== attr(locale.code) %>" href="<%== attr(uri(@requested_controller_name, uri_parameters)) %>"><%= _(locale.name) %> version</a></li>
 <%

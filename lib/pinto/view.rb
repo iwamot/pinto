@@ -1,34 +1,19 @@
 module Pinto
   class View
-    def initialize
-      @parameters = Pinto::View::Parameters.new
+    attr_reader :name, :parameters
+
+    def initialize(name)
+      @name = name
+      @parameters = {}
     end
 
     def set_parameter(symbol, value)
-      unless symbol.is_a? Symbol
-        raise TypeError.new('symbol must be Symbol')
-      end
-
-      @parameters.set(symbol, value)
-    end
-
-    def parameters
-      return @parameters
-    end
-
-    def name=(name)
-      @name = Pinto::View::Name.new(name)
-    end
-
-    def name
-      return @name
+      @parameters[symbol] = value
     end
 
     def render
-      template = File.read("view/#{self.name.to_s}.erb")
-      return Pinto::HTTP::Response::Body.new(
-        Pinto::View::XHTML.new(template).evaluate(self.parameters)
-      )
+      template = File.read("view/#{@name}.erb")
+      Pinto::View::XHTML.new(template).evaluate(@parameters)
     end
   end
 end

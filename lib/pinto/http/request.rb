@@ -1,105 +1,110 @@
 module Pinto
   module HTTP
     class Request
+      attr_reader :controller_name, :uri_parameters
+
+      def self.dispatch(env)
+        request = self.new(env)
+        request.not_found? ? request.not_found : request.run
+      end
+
       def initialize(env)
-        env = Pinto::Server::Environment.new(env)
+        @request = Rack::Request.new(env)
+        @controller_name = ''
+        @uri_parameters = {}
 
-        self.env = env
-        self.controller_name = ''
-        self.uri_parameters = {}
-
-        Pinto::Config.uri_templates.each do |uri_templates_record|
-          uri_parameters = self.uri.extract_mapping(
-            uri_templates_record.uri_template
-          )
-
-          unless uri_parameters.empty?
-            self.controller_name = uri_templates_record.controller_name
-            self.uri_parameters = uri_parameters
+        Pinto::Config.uri_templates.each do |controller_name, uri_template|
+          uri_parameters = Pinto::URI.extract(self.uri, uri_template)
+          unless uri_parameters.nil?
+            @controller_name = controller_name
+            @uri_parameters = uri_parameters
             break
           end
         end
       end
 
-      def env=(env)
-        @env = Pinto::Server::Environment.new(env)
-      end
-
-      def env
-        return @env
-      end
-
-      def to_hash
-        return @env.to_hash
-      end
-
-      def controller_name=(controller_name)
-        @controller_name = Pinto::Controller::Name.new(controller_name)
-      end
-
-      def controller_name
-        return @controller_name
-      end
-
-      def uri_parameters=(uri_parameters)
-        @uri_parameters = Pinto::URI::Parameters.new(uri_parameters)
-      end
-
-      def uri_parameters
-        return @uri_parameters
-      end
-
-      def uri
-        return Pinto::URI.new(Addressable::URI.parse(self.request.url))
-      end
-
-      def request
-        return Rack::Request.new(self.env.to_hash)
-      end
-
-      def not_found?
-        return (self.controller_name == '')
-      end
-
-      def no_locale?
-        return self.locale_code.empty?
-      end
-
-      def locale_code
-        return self.uri_parameters.locale_code
-      end
-
       def get?
-        return self.request.get?
+        @request.get?
       end
 
       def post?
-        return self.request.post?
+        @request.post?
+      end
+
+      def put?
+        @request.request_method == 'PUT'
+      end
+
+      def delete?
+        @request.request_method == 'DELETE'
       end
 
       def head?
-        return (self.request.request_method == 'HEAD')
+        @request.request_method == 'HEAD'
       end
 
       def options?
-        return (self.request.request_method == 'OPTIONS')
+        @request.request_method == 'OPTIONS'
       end
 
-      def query(key)
-        return self.request.GET[key.to_s]
+      def not_found
+        self.error(Pinto::HTTP::StatusCode::NOT_FOUND)
       end
 
-      def posted(key)
-        return self.request.POST[key.to_s]
+      def multiple
+        Pinto::Controller::Multiple.run(self)
+      end
+
+      def method_not_allowed
+        self.error(
+          Pinto::HTTP::StatusCode::METHOD_NOT_ALLOWED,
+          self._('Requested HTTP method is invalid for this resource')
+        )
+      end
+
+      def bad_request(message)
+        self.error(Pinto::HTTP::StatusCode::BAD_REQUEST, message)
+      end
+
+      def error(status_code, message = '')
+        Pinto::Controller::Error.run(self, status_code, message)
       end
 
       def run
-        return Pathname.new("pinto/controller/#{self.controller_name}"
-                           ).get_class.new.run(self)
+        Class.create("Pinto::Controller::#{@controller_name.camelize}"
+                    ).run(self)
+      end
+
+      def uri
+        @request.url
+      end
+
+      def locale_code
+        @uri_parameters['locale_code']
+      end
+
+      def query(key)
+        @request.GET[key]
+      end
+
+      def posted(key)
+        @request.POST[key]
       end
 
       def query_strings
-        return Pinto::URI::QueryStrings.new(self.request.GET)
+        @request.GET
+      end
+
+      def no_locale?
+        self.locale_code.empty?
+      end
+
+      def not_found?
+        @controller_name == ''
+      end
+
+      def _(message_id)
+        Pinto::Translator.new(self.locale_code)._(message_id)
       end
     end
   end
