@@ -8,4 +8,4 @@ use Rack::ShowExceptions
 use Rack::Reloader, 1
 use Rack::Lint
 
-run Pinto::Dispatcher.new
+run PintoBeans::RackInterfacer.new

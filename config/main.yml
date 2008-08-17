@@ -1,4 +1,8 @@
-uri_templates:
+app_name: Pinto
+
+mode: production
+
+routes:
   index:          http://{locale_code}pinto.jp/
   signup_openid:  http://{locale_code}pinto.jp/signup_forms/openid
   signup_auth:    http://{locale_code}pinto.jp/signup_forms/auth{query_string}
