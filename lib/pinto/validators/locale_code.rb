@@ -2,8 +2,10 @@
 
 module Pinto
   class LocaleCodeValidator
+    attr_writer :config
+
     def matcher
-      PintoBeans::Config.new.locales.map do |locale|
+      @config.locales.map do |locale|
         locale.code
       end.push('').join('\.|')
     end

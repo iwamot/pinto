@@ -1,6 +1,7 @@
 app_name: Pinto
 
 mode: production
+#mode: maintenance
 
 routes:
   index:          http://{locale_code}pinto.jp/

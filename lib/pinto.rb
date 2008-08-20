@@ -6,7 +6,11 @@ module Pinto
   autoload :LocaleSetter, 'pinto/locale_setter'
 
   autoload :IndexController, 'pinto/controllers/index'
+  autoload :MethodNotAllowedController, 'pinto/controllers/method_not_allowed'
+  autoload :MultipleChoicesController, 'pinto/controllers/multiple_choices'
   autoload :NotFoundController, 'pinto/controllers/not_found'
+  autoload :ServiceUnavailableController, 'pinto/controllers/service_unavailable'
+  autoload :UnauthorizedController, 'pinto/controllers/unauthorized'
 
   autoload :LocaleCodeValidator, 'pinto/validators/locale_code'
   autoload :QueryStringValidator, 'pinto/validators/query_string'

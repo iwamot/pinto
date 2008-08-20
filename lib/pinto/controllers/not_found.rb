@@ -2,13 +2,10 @@
 
 module Pinto
   class NotFoundController
-    include PintoBeans::BaseController
-
-    def run
-      response = PintoBeans::HttpResponse.new
+    def run(request, route, response)
       response.status_code = 404
-      response.headers = {'Content-Type' => 'text/html; charset=UTF-8'}
-      response.body = 'Not Found'
+      response.headers = {'Content-Type' => 'text/plain; charset=UTF-8'}
+      response.body = 'Pinto: 404 Not Found'
       response
     end
   end

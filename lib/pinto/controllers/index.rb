@@ -2,13 +2,26 @@
 
 module Pinto
   class IndexController
-    include PintoBeans::BaseController
+=begin
+    def not_found?(request, route)
+      false
+    end
 
-    def run
-      response = PintoBeans::HttpResponse.new
+    def unauthorized?(request, route)
+      false
+    end
+=end
+
+    attr_reader :support_multiple_choices
+
+    def initialize
+      @support_multiple_choices = true
+    end
+
+    def get_action(request, route, response)
       response.status_code = 200
-      response.headers = {'Content-Type' => 'text/html; charset=UTF-8'}
-      response.body = self.inspect
+      response.headers = {'Content-Type' => 'text/plain; charset=UTF-8'}
+      response.body = 'Pinto: 200 OK'
       response
     end
   end
