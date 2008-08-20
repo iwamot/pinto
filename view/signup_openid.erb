@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%== attr(@locale_code) %>">
+<head>
+<title>Pinto</title>
+</head>
+<body>
+<h1><a rel="start" href="<%== attr(uri('index', 'locale_code' => @locale_code)) %>">Pinto</a></h1>
+<form method="get" action="<%== attr(uri('signup_auth', 'locale_code' => @locale_code)) %>">
+<p>
+<%= _('OpenID provider') %>:
+<select name="openid">
+<% @openid_providers.each do |provider| %>
+<option value="<%== attr(provider) %>"><%= provider %></option>
+<% end %>
+</select>
+<input type="submit" value="<%== attr(_('OK')) %>" />
+</p>
+</form>
+<ul>
+<% @other_locales.each do |locale| %>
+<li><a rel="alternate" hreflang="<%== attr(locale.code) %>" href="<%== attr(uri('signup_openid', 'locale_code' => locale.code)) %>"><%= _('%{locale_name} version of this page') % {:locale_name => _(locale.name)} %></a></li>
+<% end %>
+</ul>
+</body>
+</html>
