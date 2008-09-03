@@ -221,9 +221,9 @@ describe 'http://pinto.jp/' do
   describe 'when GET with valid RFC 1123 time for If-Modified-Since header' do
     before(:all) do
       first_response = @http.get('/')
-      @last_modified = first_response['Last-Modified']
+      last_modified = first_response['Last-Modified']
       @etag = first_response['ETag']
-      @response = @http.get('/', 'If-Modified-Since' => @last_modified)
+      @response = @http.get('/', 'If-Modified-Since' => last_modified)
     end
 
     it 'should return 304 for status code' do
@@ -244,6 +244,317 @@ describe 'http://pinto.jp/' do
       @response.key?('Content-Type').should be_false
       @response.key?('Expires').should be_false
       @response.key?('Last-Modified').should be_false
+    end
+  end
+
+  describe 'when GET with valid RFC 1036 time for If-Modified-Since header' do
+    before(:all) do
+      first_response = @http.get('/')
+      last_modified = first_response['Last-Modified']
+      last_modified_rfc1036 = Time.httpdate(last_modified).utc.
+                              strftime('%A, %d-%b-%y %H:%M:%S GMT')
+      @etag = first_response['ETag']
+      @response = @http.get('/', 'If-Modified-Since' => last_modified_rfc1036)
+    end
+
+    it 'should return 304 for status code' do
+      @response.code.should == '304'
+    end
+
+    it 'should return the same ETag header' do
+      @response['ETag'].should == @etag
+    end
+
+    it 'should not return other entity headers' do
+      @response.key?('Allow').should be_false
+      @response.key?('Content-Encoding').should be_false
+      @response.key?('Content-Length').should be_false
+      @response.key?('Content-Location').should be_false
+      @response.key?('Content-MD5').should be_false
+      @response.key?('Content-Range').should be_false
+      @response.key?('Content-Type').should be_false
+      @response.key?('Expires').should be_false
+      @response.key?('Last-Modified').should be_false
+    end
+  end
+
+  describe 'when GET with valid asctime() formatted time for If-Modified-Since header' do
+    before(:all) do
+      first_response = @http.get('/')
+      last_modified = first_response['Last-Modified']
+      last_modified_asctime = Time.httpdate(last_modified).utc.
+                              strftime('%a %b ' + Time.httpdate(last_modified).day.to_s.rjust(2) + ' %H:%M:%S %Y')
+      @etag = first_response['ETag']
+      @response = @http.get('/', 'If-Modified-Since' => last_modified_asctime)
+    end
+
+    it 'should return 304 for status code' do
+      @response.code.should == '304'
+    end
+
+    it 'should return the same ETag header' do
+      @response['ETag'].should == @etag
+    end
+
+    it 'should not return other entity headers' do
+      @response.key?('Allow').should be_false
+      @response.key?('Content-Encoding').should be_false
+      @response.key?('Content-Length').should be_false
+      @response.key?('Content-Location').should be_false
+      @response.key?('Content-MD5').should be_false
+      @response.key?('Content-Range').should be_false
+      @response.key?('Content-Type').should be_false
+      @response.key?('Expires').should be_false
+      @response.key?('Last-Modified').should be_false
+    end
+  end
+
+  describe 'when GET with advanced time for If-Modified-Since header' do
+    before(:all) do
+      first_response = @http.get('/')
+      last_modified = first_response['Last-Modified']
+      invalid_time = Time.httpdate(last_modified).utc.succ.httpdate
+      @response = @http.get('/', 'If-Modified-Since' => invalid_time)
+    end
+
+    it 'should return 300 for status code' do
+      @response.code.should == '300'
+    end
+
+    it 'should return "max-age=21600" for Cache-Control header' do
+      @response['Cache-Control'].should == 'max-age=21600'
+    end
+
+    it 'should return MD5 of response body for ETag header' do
+      @response['ETag'].should ==
+            '"' + Digest::MD5.hexdigest(@response.body) + '"'
+    end
+
+    it 'should return "GET, HEAD, OPTIONS" for Allow header' do
+      @response['Allow'].should == 'GET, HEAD, OPTIONS'
+    end
+
+    it 'should return "en" for Content-Language header' do
+      @response['Content-Language'].should == 'en'
+    end
+
+    it 'should return "application/xhtml+xml; charset=UTF-8" for Content-Type header' do
+      @response['Content-Type'].should ==
+            'application/xhtml+xml; charset=UTF-8'
+    end
+
+    it 'should return past time in HTTP-date for Last-Modified header' do
+      Time.now.should >= Time.httpdate(@response['Last-Modified'])
+    end
+
+    it 'should return time 6 hours later than Last-Modified for Expires header' do
+      Time.httpdate(@response['Expires']).should ==
+            Time.httpdate(@response['Last-Modified']) + (60 * 60 * 6)
+    end
+  end
+
+  describe 'when GET with delayed time for If-Modified-Since header' do
+    before(:all) do
+      first_response = @http.get('/')
+      last_modified = first_response['Last-Modified']
+      invalid_time = Time.httpdate(last_modified).utc.succ.httpdate
+      @response = @http.get('/', 'If-Modified-Since' => invalid_time)
+    end
+
+    it 'should return 300 for status code' do
+      @response.code.should == '300'
+    end
+
+    it 'should return "max-age=21600" for Cache-Control header' do
+      @response['Cache-Control'].should == 'max-age=21600'
+    end
+
+    it 'should return MD5 of response body for ETag header' do
+      @response['ETag'].should ==
+            '"' + Digest::MD5.hexdigest(@response.body) + '"'
+    end
+
+    it 'should return "GET, HEAD, OPTIONS" for Allow header' do
+      @response['Allow'].should == 'GET, HEAD, OPTIONS'
+    end
+
+    it 'should return "en" for Content-Language header' do
+      @response['Content-Language'].should == 'en'
+    end
+
+    it 'should return "application/xhtml+xml; charset=UTF-8" for Content-Type header' do
+      @response['Content-Type'].should ==
+            'application/xhtml+xml; charset=UTF-8'
+    end
+
+    it 'should return past time in HTTP-date for Last-Modified header' do
+      Time.now.should >= Time.httpdate(@response['Last-Modified'])
+    end
+
+    it 'should return time 6 hours later than Last-Modified for Expires header' do
+      Time.httpdate(@response['Expires']).should ==
+            Time.httpdate(@response['Last-Modified']) + (60 * 60 * 6)
+    end
+  end
+
+  describe 'when GET with malformed time for If-Modified-Since header' do
+    before(:all) do
+      @response = @http.get('/', 'If-Modified-Since' => 'zzz')
+    end
+
+    it 'should return 300 for status code' do
+      @response.code.should == '300'
+    end
+
+    it 'should return "max-age=21600" for Cache-Control header' do
+      @response['Cache-Control'].should == 'max-age=21600'
+    end
+
+    it 'should return MD5 of response body for ETag header' do
+      @response['ETag'].should ==
+            '"' + Digest::MD5.hexdigest(@response.body) + '"'
+    end
+
+    it 'should return "GET, HEAD, OPTIONS" for Allow header' do
+      @response['Allow'].should == 'GET, HEAD, OPTIONS'
+    end
+
+    it 'should return "en" for Content-Language header' do
+      @response['Content-Language'].should == 'en'
+    end
+
+    it 'should return "application/xhtml+xml; charset=UTF-8" for Content-Type header' do
+      @response['Content-Type'].should ==
+            'application/xhtml+xml; charset=UTF-8'
+    end
+
+    it 'should return past time in HTTP-date for Last-Modified header' do
+      Time.now.should >= Time.httpdate(@response['Last-Modified'])
+    end
+
+    it 'should return time 6 hours later than Last-Modified for Expires header' do
+      Time.httpdate(@response['Expires']).should ==
+            Time.httpdate(@response['Last-Modified']) + (60 * 60 * 6)
+    end
+  end
+
+  describe 'when GET with valid If-None-Match header and valid If-Modified-Since header' do
+    before(:all) do
+      first_response = @http.get('/')
+      last_modified = first_response['Last-Modified']
+      @etag = first_response['ETag']
+      @response = @http.get('/', 'If-Modified-Since' => last_modified,
+                                 'If-None-Match'     => @etag)
+    end
+
+    it 'should return 304 for status code' do
+      @response.code.should == '304'
+    end
+
+    it 'should return the same ETag header' do
+      @response['ETag'].should == @etag
+    end
+
+    it 'should not return other entity headers' do
+      @response.key?('Allow').should be_false
+      @response.key?('Content-Encoding').should be_false
+      @response.key?('Content-Length').should be_false
+      @response.key?('Content-Location').should be_false
+      @response.key?('Content-MD5').should be_false
+      @response.key?('Content-Range').should be_false
+      @response.key?('Content-Type').should be_false
+      @response.key?('Expires').should be_false
+      @response.key?('Last-Modified').should be_false
+    end
+  end
+
+  describe 'when GET with invalid If-None-Match header and valid If-Modified-Since header' do
+    before(:all) do
+      first_response = @http.get('/')
+      last_modified = first_response['Last-Modified']
+      etag = first_response['ETag']
+      @response = @http.get('/', 'If-Modified-Since' => last_modified,
+                                 'If-None-Match'     => etag + 'zzz')
+    end
+
+    it 'should return 300 for status code' do
+      @response.code.should == '300'
+    end
+
+    it 'should return "max-age=21600" for Cache-Control header' do
+      @response['Cache-Control'].should == 'max-age=21600'
+    end
+
+    it 'should return MD5 of response body for ETag header' do
+      @response['ETag'].should ==
+            '"' + Digest::MD5.hexdigest(@response.body) + '"'
+    end
+
+    it 'should return "GET, HEAD, OPTIONS" for Allow header' do
+      @response['Allow'].should == 'GET, HEAD, OPTIONS'
+    end
+
+    it 'should return "en" for Content-Language header' do
+      @response['Content-Language'].should == 'en'
+    end
+
+    it 'should return "application/xhtml+xml; charset=UTF-8" for Content-Type header' do
+      @response['Content-Type'].should ==
+            'application/xhtml+xml; charset=UTF-8'
+    end
+
+    it 'should return past time in HTTP-date for Last-Modified header' do
+      Time.now.should >= Time.httpdate(@response['Last-Modified'])
+    end
+
+    it 'should return time 6 hours later than Last-Modified for Expires header' do
+      Time.httpdate(@response['Expires']).should ==
+            Time.httpdate(@response['Last-Modified']) + (60 * 60 * 6)
+    end
+  end
+
+  describe 'when GET with valid If-None-Match header and invalid If-Modified-Since header' do
+    before(:all) do
+      first_response = @http.get('/')
+      last_modified = Time.httpdate(first_response['Last-Modified']).utc
+      etag = first_response['ETag']
+      @response = @http.get('/', 'If-Modified-Since' => last_modified.succ.httpdate,
+                                 'If-None-Match'     => etag)
+    end
+
+    it 'should return 300 for status code' do
+      @response.code.should == '300'
+    end
+
+    it 'should return "max-age=21600" for Cache-Control header' do
+      @response['Cache-Control'].should == 'max-age=21600'
+    end
+
+    it 'should return MD5 of response body for ETag header' do
+      @response['ETag'].should ==
+            '"' + Digest::MD5.hexdigest(@response.body) + '"'
+    end
+
+    it 'should return "GET, HEAD, OPTIONS" for Allow header' do
+      @response['Allow'].should == 'GET, HEAD, OPTIONS'
+    end
+
+    it 'should return "en" for Content-Language header' do
+      @response['Content-Language'].should == 'en'
+    end
+
+    it 'should return "application/xhtml+xml; charset=UTF-8" for Content-Type header' do
+      @response['Content-Type'].should ==
+            'application/xhtml+xml; charset=UTF-8'
+    end
+
+    it 'should return past time in HTTP-date for Last-Modified header' do
+      Time.now.should >= Time.httpdate(@response['Last-Modified'])
+    end
+
+    it 'should return time 6 hours later than Last-Modified for Expires header' do
+      Time.httpdate(@response['Expires']).should ==
+            Time.httpdate(@response['Last-Modified']) + (60 * 60 * 6)
     end
   end
 end
