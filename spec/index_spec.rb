@@ -1,10 +1,16 @@
-$spec = {}
-$spec[:allowed_methods]  = 'GET, HEAD, OPTIONS'
-$spec[:host]             = 'pinto.jp'
-$spec[:path]             = '/'
-$spec[:multiple_choices] = true
-$spec[:content_type]     = 'XHTML'
-$spec[:expires]          = 60 * 60 * 6
+$LOAD_PATH << 'lib'
+$LOAD_PATH << '../pinto_beans/lib'
 
-$LOAD_PATH << '../'
-require 'pinto_beans/spec/restful'
+require 'pinto/spec/base'
+
+module Pinto
+  class IndexSpec < Pinto::Spec::Base
+    def define
+      @uri = 'http://pinto.jp/'
+      @allowed_methods = ['GET', 'HEAD', 'OPTIONS']
+    end
+  end
+end
+
+spec = Pinto::IndexSpec.new
+spec.run
