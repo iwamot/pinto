@@ -1,7 +1,0 @@
-#!/usr/bin/ruby
-
-require 'rubygems'
-require 'pinto_beans'
-
-PintoBeans::Server.new.start
-
